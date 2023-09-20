@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { reqColunaDisponibilidadeAgrupado, reqColunaDisponibilidadeTurno, reqColunaProducao } from "../requisicoes";
+import { reqColunaDisponibilidadeTurno } from "../requisicoes";
 
 export function useChamaComponente() {
 
@@ -45,11 +45,12 @@ export function useMutations() {
 
     const [responseColunaDisponibilidadeTurno] = requestions?.data
 
+    console.log(requestions.data)
+
     const calcularDisponibilidade = () => {
 
-        const buscaDadosDisponibilidade = responseColunaDisponibilidadeTurno
-        const valorDisponibilidade = buscaDadosDisponibilidade?.[0]?.disponibilidade === undefined || buscaDadosDisponibilidade?.[0]?.disponibilidade === 0 ? 0 : buscaDadosDisponibilidade?.[0]?.disponibilidade?.toLocaleString('pt-BR', { currency: 'BRL' })
-        const valorTempoParado = buscaDadosDisponibilidade?.[0]?.tempominparada === undefined || buscaDadosDisponibilidade?.[0]?.tempominparada === 0 ? 0 : buscaDadosDisponibilidade?.[0]?.tempominparada?.toLocaleString('pt-BR', { currency: 'BRL' })
+        const valorDisponibilidade = responseColunaDisponibilidadeTurno?.[0]?.disponibilidade === undefined || responseColunaDisponibilidadeTurno?.[0]?.disponibilidade === 0 ? 0 : responseColunaDisponibilidadeTurno?.[0]?.disponibilidade?.toLocaleString('pt-BR', { currency: 'BRL' })
+        const valorTempoParado = responseColunaDisponibilidadeTurno?.[0]?.tempoparado === undefined || responseColunaDisponibilidadeTurno?.[0]?.tempoparado === 0 ? 0 : responseColunaDisponibilidadeTurno?.[0]?.tempoparado?.toLocaleString('pt-BR', { currency: 'BRL' })
 
         return {
             valorDisponibilidade,
@@ -72,8 +73,6 @@ export function useMutations() {
     }
 }
 
-
-
 function useColunaDisponibilidade() {
 
     const { mutate: mutateColunaDisponibilidadeTurno, data: dataColunaDisponibilidadeTurno } = useMutation({
@@ -85,17 +84,7 @@ function useColunaDisponibilidade() {
         mutateColunaDisponibilidadeTurno({ unidade, linhaProducao, periodo })
     }
 
-    const buscaDadosDisponibilidade = dataColunaDisponibilidadeTurno
-
-    // disponibilidade
-    const valorDisponibilidade = buscaDadosDisponibilidade?.[0]?.disponibilidade === undefined || buscaDadosDisponibilidade?.[0]?.disponibilidade === 0 ? 0 : buscaDadosDisponibilidade?.[0]?.disponibilidade?.toLocaleString('pt-BR', { currency: 'BRL' })
-    const valorTempoParado = buscaDadosDisponibilidade?.[0]?.tempominparada === undefined || buscaDadosDisponibilidade?.[0]?.tempominparada === 0 ? 0 : buscaDadosDisponibilidade?.[0]?.tempominparada?.toLocaleString('pt-BR', { currency: 'BRL' })
-
     return {
         mutationColunaDisponibilidadeTurno: validacaoColunaDisponibilidadeTurno,
-        dadosColunaDisponibilidade: {
-            valorDisponibilidade,
-            valorTempoParado,
-        }
     }
 }

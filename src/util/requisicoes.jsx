@@ -3,6 +3,7 @@ import { Api } from "./api";
 
 export async function reqUnidade() {
     const res = await Api.get(`v1/public/unidade`);
+    // console.log(res.data)
     return res.data;
 }
 

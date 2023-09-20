@@ -18,7 +18,6 @@ export default function Menu() {
         }
     } = useMutations()
 
-    const { componente, atualizarComponente } = useChamaComponente()
     const [unidade, setUnidade] = useState(0)
     const [linhaProducao, setLinhaProducao] = useState(0)
     const [linhaEscolha, setLinhaEscolha] = useState([])
@@ -68,7 +67,7 @@ export default function Menu() {
 
     function insereDados() {
         if (linhaProducao > 0 && periodo) {
-            mutationColunaDisponibilidadeTurno({ unidade, linhaProducao, periodo })
+            mutationColunaDisponibilidadeTurno(unidade, linhaProducao, periodo)
         }
     }
 
@@ -85,23 +84,19 @@ export default function Menu() {
         <>
             <S.Pai>
                 <div></div>
-                {aberto && componente}
+                {/* {aberto && componente} */}
+                {aberto && <Filtro
+                    alterarAberto={alterarAberto}
+                    recebeDados={recebeDados}
+
+                    unidade={dataUnidade}
+                    linhaProducao={dataLinhaProducao}
+                    linhaEscolha={dataLinhaEscolha}
+                />}
 
                 <S.Principal>
                     <S.Img src={logoDexco} />
-                    <S.Button onClick={() => {
-                        setAberto(true);
-                        atualizarComponente(
-                            <Filtro
-                                alterarAberto={alterarAberto}
-                                recebeDados={recebeDados}
-
-                                unidade={dataUnidade}
-                                linhaProducao={dataLinhaProducao}
-                                linhaEscolha={dataLinhaEscolha}
-                            />
-                        )
-                    }}>Iniciar aprensentação</S.Button>
+                    <S.Button onClick={() => { setAberto(true); }}>Iniciar aprensentação</S.Button>
                 </S.Principal>
                 <span style={{ background: 'red', width: '150px', height: '150px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade.valorTempoParado}</span>
                 <span style={{ background: 'blue', width: '150px', height: '150px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade.valorDisponibilidade}</span>
