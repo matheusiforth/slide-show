@@ -5,59 +5,27 @@ import Select from 'react-select'
 import { customMedia } from "../../util/customMedia";
 import media from "styled-media-query";
 
-export const Pai = styled.div`
-    background-color: #0b0b0b;
-    width: 100vw;
-    height: 6vh;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    cursor: pointer;
-    &:hover{
-        background-color: #151515;
-    }
-    /* ${customMedia.greaterThan('tv')`
-      // font-size: 2rem;
-  `}; */
-`
-
-export const Titulo = styled.h1`
-    color: white;
-    font-size: 1.25rem;
-    position: relative;
-
-    ${customMedia.greaterThan('tv')`
-        font-size: 2rem;
-    `};
-`
-
-export const Main = styled.div`
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    z-index: 999;
-`
-
 export const Sidebar = styled.div`
     box-sizing: border-box;
     background-color: #0b0b0b;
-    height: 100vh;
-    width: 15vw;
+    height: 50vh;
+    width: 20vw;
+    padding: 1rem;
+    top: 25vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: solid 1px white;
+    border-radius: 8px;
+    position: absolute;
 `
 
 export const Header = styled.div`
     box-sizing: border-box;
-    height: 8vh;
+    height: 6vh;
     padding: 1rem;
     width: 100%;
+    text-align: right;
 `
 
 export const Body = styled.div`

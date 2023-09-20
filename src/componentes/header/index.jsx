@@ -1,5 +1,5 @@
 import * as S from './style'
-import logo from '../../util/dexco-logo.png'
+import logoDexco from '../../imagens/dexco-logo.png'
 
 export function Header(props) {
 
@@ -7,7 +7,7 @@ export function Header(props) {
         <>
             <S.LogoLinha>
                 <span style={{ color: 'white' }}>Ex Forno 1</span>
-                <S.Img src={logo} />
+                <S.Img src={logoDexco} />
             </S.LogoLinha>
             <S.Pai>
                 <S.EnglobaSubtitulo>
