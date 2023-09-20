@@ -45,7 +45,7 @@ export function useMutations() {
 
     const [responseColunaDisponibilidadeTurno] = requestions?.data
 
-    console.log(requestions.data)
+    console.log(requestions)
 
     const calcularDisponibilidade = () => {
 
@@ -84,7 +84,14 @@ function useColunaDisponibilidade() {
         mutateColunaDisponibilidadeTurno({ unidade, linhaProducao, periodo })
     }
 
+    // const valorDisponibilidade = dataColunaDisponibilidadeTurno?.[0]?.disponibilidade === undefined || dataColunaDisponibilidadeTurno?.[0]?.disponibilidade === 0 ? 0 : dataColunaDisponibilidadeTurno?.[0]?.disponibilidade?.toLocaleString('pt-BR', { currency: 'BRL' })
+    // const valorTempoParado = dataColunaDisponibilidadeTurno?.[0]?.tempoparado === undefined || dataColunaDisponibilidadeTurno?.[0]?.tempoparado === 0 ? 0 : dataColunaDisponibilidadeTurno?.[0]?.tempoparado?.toLocaleString('pt-BR', { currency: 'BRL' })
+
     return {
         mutationColunaDisponibilidadeTurno: validacaoColunaDisponibilidadeTurno,
+        // dadosColunaDisponibilidade: {
+        //     valorDisponibilidade,
+        //     valorTempoParado
+        // },
     }
 }
