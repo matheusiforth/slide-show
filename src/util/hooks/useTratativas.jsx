@@ -58,7 +58,7 @@ export function useTratativas() {
     }
 
     const { valorTempoParado, valorDisponibilidade } = calcularDisponibilidade();
-    // atualizaDados({ valorTempoParado, valorDisponibilidade });
+    // atualizaDados({ valorTempoParado, valorDisponibilidade }); se descomentar isso, funciona com erro
 
 
     return {
