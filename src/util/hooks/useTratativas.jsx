@@ -1,8 +1,8 @@
 import { useMutation } from "react-query";
 import { reqColunaDisponibilidadeTurno } from "../requisicoes";
-import { useColunaDisponibilidade } from "./iniciaReq";
+import { useColunaDisponibilidade } from "./useRequisicoes";
 
-export function useMutations() {
+export function useTratativas() {
 
     const useRequestions = () => {
         return useMutation({

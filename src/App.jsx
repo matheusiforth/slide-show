@@ -3,7 +3,7 @@ import * as S from './style'
 import logoDexco from './imagens/dexco-logo.png'
 import logoIforth from './imagens/logo-iforth.png'
 import { Filtro } from './componentes/filtro';
-import { useChamaComponente, useMutations } from './util/hooks';
+import { useChamaComponente, useTratativas } from './util/hooks';
 import { reqLinhaEscolha, reqLinhaProducao, reqUnidade } from './util/requisicoes';
 import { useMutation, useQuery } from 'react-query';
 import { MeuContexto } from './util/context';
@@ -19,14 +19,13 @@ export default function App() {
         functions: {
             mutationColunaDisponibilidadeTurno,
         }
-    } = useMutations()
+    } = useTratativas()
 
     const [unidade, setUnidade] = useState(0)
     const [linhaProducao, setLinhaProducao] = useState([])
     const [linhaEscolha, setLinhaEscolha] = useState([])
     const [periodo, setPeriodo] = useState(null)
     const [date, setDate] = useState(null)
-    const [aberto, setAberto] = useState(false)
 
     const { error: erroUnidade, data: dataUnidade } = useQuery('unidade', async () => reqUnidade(), {
         refetchOnWindowFocus: false
@@ -86,7 +85,6 @@ export default function App() {
         <>
             <S.Pai>
                 <div></div>
-                {/* {aberto && componente} */}
                 <S.Principal>
                     <S.Img src={logoDexco} />
                     <Filtro

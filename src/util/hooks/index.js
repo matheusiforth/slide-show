@@ -1,3 +1,3 @@
-export * from './chamaComponente'
-export * from './iniciaReq'
-export * from './tratativas'
+export * from './useChamaComponente'
+export * from './useRequisicoes'
+export * from './useTratativas'
