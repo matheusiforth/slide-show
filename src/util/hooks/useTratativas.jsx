@@ -1,6 +1,9 @@
+import React, { useContext } from 'react'
 import { useMutation } from "react-query";
 import { reqColunaDisponibilidadeTurno } from "../requisicoes";
 import { useColunaDisponibilidade } from "./useRequisicoes";
+import { MeuContexto } from '../context';
+import { useMeuContexto } from '../context';
 
 export function useTratativas() {
 
@@ -14,6 +17,8 @@ export function useTratativas() {
             }
         })
     }
+
+    const { atualizaDados } = useMeuContexto()
 
     const requestions = useRequestions() //passei para const pois nao dava para usar no if
     const colunaDisponibilidade = useColunaDisponibilidade()
@@ -53,13 +58,15 @@ export function useTratativas() {
     }
 
     const { valorTempoParado, valorDisponibilidade } = calcularDisponibilidade();
+    // atualizaDados({ valorTempoParado, valorDisponibilidade });
+
 
     return {
         handleExecutaRequestions,
         dados: {
             dadosColunaDisponibilidade: {
-                valorTempoParado,
-                valorDisponibilidade
+                // valorTempoParado,
+                // valorDisponibilidade
             },
         },
         functions: {

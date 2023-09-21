@@ -11,7 +11,7 @@ export function useColunaDisponibilidade() {
     function validacaoColunaDisponibilidadeTurno(unidade, linhaProducao, periodo) {
         mutateColunaDisponibilidadeTurno({ unidade, linhaProducao, periodo })
     }
-
+    
     return {
         mutationColunaDisponibilidadeTurno: validacaoColunaDisponibilidadeTurno,
     }

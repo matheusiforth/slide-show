@@ -3,22 +3,12 @@ import * as S from './style'
 import logoDexco from './imagens/dexco-logo.png'
 import logoIforth from './imagens/logo-iforth.png'
 import { Filtro } from './componentes/filtro';
-import { MeuContexto } from './util/context';
+import { MeuContexto, useMeuContexto } from './util/context';
 import { useTratativas } from './util/hooks';
 
 export default function App() {
 
-    const { estado, minhaFuncao } = useContext(MeuContexto)
-    const {
-        dados: {
-            dadosColunaDisponibilidade
-        }
-    } = useTratativas()
-
-    useEffect(() => {
-        // Limpar o localStorage quando o componente é montado
-        localStorage.clear();
-    }, []);
+    const { estado, atualizaDados } = useMeuContexto()
 
     return (
         <>
@@ -29,8 +19,8 @@ export default function App() {
                     <Filtro />
                 </S.Principal>
                 <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                    <span style={{ background: 'red', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade.valorTempoParado}</span>
-                    <span style={{ background: 'blue', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade.valorDisponibilidade}</span>
+                    <span style={{ background: 'red', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{estado?.valorTempoParado}</span>
+                    <span style={{ background: 'blue', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{estado?.valorDisponibilidade}</span>
                 </div>
 
                 <S.Footer>

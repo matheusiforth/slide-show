@@ -1,19 +1,29 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 export const MeuContexto = createContext();
 
 export const MeuContextoProvider = ({ children }) => {
-    const [estado, setEstado] = useState(false);
+    const [estado, setEstado] = useState(null);
 
-    const minhaFuncao = (novoValue) => {
-        setEstado(novoValue)
+    const atualizaDados = (novosDados) => {
+        // if (novosDados) {
+        setEstado(novosDados);
+        // }
     };
 
-    console.log(estado)
+    useEffect(() => {
+        // limpa o localStorage quando o componente é montado
+        localStorage.clear();
+    }, []);
+
 
     return (
-        <MeuContexto.Provider value={{ estado, minhaFuncao }}>
+        <MeuContexto.Provider value={{ estado, atualizaDados }}>
             {children}
         </MeuContexto.Provider>
     );
+}
+
+export const useMeuContexto = () => {
+    return useContext(MeuContexto)
 }
