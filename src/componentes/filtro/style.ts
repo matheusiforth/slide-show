@@ -7,17 +7,17 @@ import media from "styled-media-query";
 
 export const Sidebar = styled.div`
     box-sizing: border-box;
-    background-color: #0b0b0b;
-    height: 50vh;
+    /* background-color: #0b0b0b; */
+    height: 42vh;
     width: 20vw;
     padding: 1rem;
     top: 25vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 1px white;
+    /* border: solid 1px white; */
     border-radius: 8px;
-    position: absolute;
+    /* position: absolute; */
 `
 
 export const Header = styled.div`

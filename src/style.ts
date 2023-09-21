@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { customMedia } from "../../util/customMedia";
+import { customMedia } from "./util/customMedia";
 
 export const Pai = styled.div`
     box-sizing: border-box;

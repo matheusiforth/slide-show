@@ -1,4 +1,3 @@
-import { idText } from "typescript";
 import { Api } from "./api";
 
 export async function reqUnidade() {
@@ -20,6 +19,5 @@ export async function reqLinhaEscolha(idUnidade) { //escolha
 
 export async function reqColunaDisponibilidadeTurno(value) {
     const res = await Api.get(`/v1/web/consulta/gerencial/disponibilidade/turno/dia/${value.unidade}/${value.linhaProducao}/0/${value.periodo}`);
-    console.log(res.data)
     return res.data;
 }

@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import * as S from './style'
+import { useChamaComponente } from '../../util/hooks'
 
 export function Filtro(props) {
 
+    const { componente, atualizarComponente } = useChamaComponente()
     const [aberto, setAberto] = useState(true)
     const [backupUnidade, setBackupUnidade] = useState(0)
     const [periodoAtivo, setPeriodoAtivo] = useState(null);
-    const [backupLinhaProducao, setBackupLinhaProducao] = useState([])
-    const [backupLinhaEscolha, setBackupLinhaEscolha] = useState([])
 
     function pegaDados(value) {
         if (value?.idUnidade) {
@@ -15,11 +15,9 @@ export function Filtro(props) {
             props.recebeDados({ idUnidade: value?.idUnidade })
         }
         if (value?.idLinhaProducao) {
-            setBackupLinhaProducao(value?.idLinhaProducao)
             props.recebeDados({ idLinhaProducao: value?.idLinhaProducao })
         }
         if (value?.idLinhaEscolha) {
-            setBackupLinhaEscolha(value?.idLinhaEscolha)
             props.recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
         }
         if (value?.periodo) {
@@ -39,12 +37,10 @@ export function Filtro(props) {
     })) || [];
 
     const onChangeProducao = (value) => {
-        setBackupLinhaProducao(value);
         pegaDados({ idLinhaProducao: value?.map((value) => value?.value) })
     };
 
     const onChangeEscolha = (value) => {
-        setBackupLinhaEscolha(value);
         pegaDados({ idLinhaEscolha: value?.map((value) => value?.value) })
     };
 
@@ -115,17 +111,10 @@ export function Filtro(props) {
         <>
             {aberto &&
                 <S.Sidebar>
-                    <S.Header>
-                        <S.Fechar onClick={() => {
-                            setAberto(!aberto);
-                            props?.alterarAberto(false)
-                        }}
-                        >X</S.Fechar>
-                    </S.Header>
-
                     <S.Body>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                            <S.SelectNomal name="unidade" value={backupUnidade} onChange={(e) => {
+
+                            <S.SelectNomal name="unidade" onChange={(e) => {
                                 pegaDados({ idUnidade: e.target.value });
 
                                 const selectedOption = e.target.options[e.target.selectedIndex];
@@ -145,7 +134,7 @@ export function Filtro(props) {
                                 isMulti
                                 styles={customStyles}
                                 onChange={(e) => onChangeProducao(e)}
-                                value={backupLinhaProducao}
+                                // value={}
                                 options={optionsProducao}
                                 placeholder="Selecione a linha de Produção"
                             />
@@ -154,7 +143,6 @@ export function Filtro(props) {
                                 isMulti
                                 styles={customStyles}
                                 onChange={(e) => onChangeEscolha(e)}
-                                value={backupLinhaEscolha}
                                 options={optionsEscolha}
                                 placeholder="Selecione a linha de Escolha"
                             />
@@ -167,7 +155,10 @@ export function Filtro(props) {
                             <S.Button ativo={periodoAtivo === 3} onClick={() => { pegaDados({ periodo: 3 }); mesesAtras(3) }}>trimestral</S.Button>
                         </div>
 
-                        <S.Button style={{ background: '#5757aa' }} onClick={() => { setAberto(!aberto); props?.alterarAberto(false) }}
+                        <S.Button style={{ background: '#5757aa' }}
+                            onClick={() => {
+                                
+                            }}
                         >Aplicar filtro</S.Button>
                     </S.Body>
                 </S.Sidebar>
