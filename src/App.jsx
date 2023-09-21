@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import * as S from './style'
 import logoDexco from './imagens/dexco-logo.png'
 import logoIforth from './imagens/logo-iforth.png'
@@ -6,9 +6,11 @@ import { Filtro } from './componentes/filtro';
 import { useChamaComponente, useMutations } from './util/hooks';
 import { reqLinhaEscolha, reqLinhaProducao, reqUnidade } from './util/requisicoes';
 import { useMutation, useQuery } from 'react-query';
+import { MeuContexto } from './util/context';
 
 export default function App() {
 
+    const { estado, minhaFuncao } = useContext(MeuContexto)
     const {
         handleExecutaRequestions,
         dados: {
@@ -40,10 +42,6 @@ export default function App() {
         mutationFn: reqLinhaEscolha,
     })
 
-    const alterarAberto = (novoValor) => {
-        setAberto(novoValor);
-    };
-
     function recebeDados(value) {
         if (value?.idUnidade) {
             setUnidade(value?.idUnidade)
@@ -73,8 +71,6 @@ export default function App() {
         }
     }
 
-    console.log(linhaProducao)
-
     useEffect(() => {
         // Limpar o localStorage quando o componente é montado
         localStorage.clear();
@@ -82,7 +78,9 @@ export default function App() {
 
     useEffect(() => {
         insereDados()
-    }, [unidade, linhaProducao, linhaProducao, linhaEscolha, periodo,]);
+    }, [unidade, linhaProducao, linhaProducao, linhaEscolha, periodo]);
+
+
 
     return (
         <>
@@ -92,7 +90,6 @@ export default function App() {
                 <S.Principal>
                     <S.Img src={logoDexco} />
                     <Filtro
-                        alterarAberto={alterarAberto}
                         recebeDados={recebeDados}
 
                         unidade={dataUnidade}
