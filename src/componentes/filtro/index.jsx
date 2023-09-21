@@ -1,37 +1,48 @@
 import { useState } from 'react'
 import * as S from './style'
-import { useChamaComponente } from '../../util/hooks'
+import { useRequeIni } from '../../util/hooks/useReqInicial'
 
 export function Filtro(props) {
 
-    const { componente, atualizarComponente } = useChamaComponente()
+    const {
+        dadosIniciais: {
+            dataUnidade,
+            dataLinhaProducao,
+            dataLinhaEscolha,
+            unidade,
+            linhaProducao,
+            linhaEscolha
+        },
+        functions: {
+            recebeDados
+        },
+    } = useRequeIni()
+
     const [aberto, setAberto] = useState(true)
-    const [backupUnidade, setBackupUnidade] = useState(0)
     const [periodoAtivo, setPeriodoAtivo] = useState(null);
 
     function pegaDados(value) {
         if (value?.idUnidade) {
-            setBackupUnidade(value?.idUnidade)
-            props.recebeDados({ idUnidade: value?.idUnidade })
+            recebeDados({ idUnidade: value?.idUnidade })
         }
         if (value?.idLinhaProducao) {
-            props.recebeDados({ idLinhaProducao: value?.idLinhaProducao })
+            recebeDados({ idLinhaProducao: value?.idLinhaProducao })
         }
         if (value?.idLinhaEscolha) {
-            props.recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
+            recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
         }
         if (value?.periodo) {
             setPeriodoAtivo(value?.periodo)
-            props.recebeDados({ periodo: value?.periodo })
+            recebeDados({ periodo: value?.periodo })
         }
     }
 
-    const optionsProducao = props?.linhaProducao?.map((value) => ({
+    const optionsProducao = dataLinhaProducao?.map((value) => ({
         label: value?.desclinha,
         value: value?.idlinha
     })) || [];
 
-    const optionsEscolha = props?.linhaEscolha?.map((value) => ({
+    const optionsEscolha = dataLinhaEscolha?.map((value) => ({
         label: value?.desclinha,
         value: value?.idlinha
     })) || [];
@@ -104,7 +115,7 @@ export function Filtro(props) {
         }
 
         const nomeMes = meses[data.getMonth()];
-        props?.recebeDados({ date: `${nomeMes} de ${ano}` })
+        recebeDados({ date: `${nomeMes} de ${ano}` })
     }
 
     return (
@@ -122,10 +133,10 @@ export function Filtro(props) {
 
                                 localStorage.setItem('unidade', selectedText);
                             }}>
-                                {backupUnidade <= 0 &&
+                                {unidade <= 0 &&
                                     <option value="0" disabled selected hidden>Selecione a unidade</option>
                                 }
-                                {props?.unidade?.map((value, index) => (
+                                {dataUnidade?.map((value, index) => (
                                     <option key={index} value={value?.idunidade}>{value?.descunidade}</option>
                                 ))}
                             </S.SelectNomal>
@@ -157,7 +168,7 @@ export function Filtro(props) {
 
                         <S.Button style={{ background: '#5757aa' }}
                             onClick={() => {
-                                
+
                             }}
                         >Aplicar filtro</S.Button>
                     </S.Body>
