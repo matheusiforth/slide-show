@@ -57,6 +57,7 @@ export function useRequeIni() {
     function insereDados() {
         if (linhaProducao > 0 && periodo) {
             mutationColunaDisponibilidadeTurno(unidade, linhaProducao, periodo)
+            console.log('if do insere dados')
             handleExecutaRequestions(unidade, linhaProducao, periodo)
         }
     }

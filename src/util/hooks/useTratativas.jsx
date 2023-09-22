@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useMutation } from "react-query";
 import { reqColunaDisponibilidadeTurno } from "../requisicoes";
 import { useColunaDisponibilidade } from "./useRequisicoes";
-import { MeuContexto } from '../context';
-import { useMeuContexto } from '../context';
 
 export function useTratativas() {
 
@@ -18,18 +16,18 @@ export function useTratativas() {
         })
     }
 
-    const { atualizaDados } = useMeuContexto()
-
     const requestions = useRequestions() //passei para const pois nao dava para usar no if
     const colunaDisponibilidade = useColunaDisponibilidade()
 
     const handleExecutaRequestions = async (unidade, linhaProducao, periodo) => { //desgraçado
         if (linhaProducao > 0 && periodo) {
+            console.log('id do handle')
             requestions.mutate({ unidade, linhaProducao, periodo })
         }
     }
 
     if (!requestions.isSuccess) { //enquanto nao houver requisição e puxar dados, os valores serão zero
+        console.log('if do zero')
         return {
             handleExecutaRequestions,
             dados: {
@@ -58,15 +56,14 @@ export function useTratativas() {
     }
 
     const { valorTempoParado, valorDisponibilidade } = calcularDisponibilidade();
-    // atualizaDados({ valorTempoParado, valorDisponibilidade }); se descomentar isso, funciona com erro
-
+    console.log(valorDisponibilidade, valorTempoParado)
 
     return {
         handleExecutaRequestions,
         dados: {
             dadosColunaDisponibilidade: {
-                // valorTempoParado,
-                // valorDisponibilidade
+                valorTempoParado,
+                valorDisponibilidade
             },
         },
         functions: {
