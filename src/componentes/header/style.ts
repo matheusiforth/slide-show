@@ -5,7 +5,7 @@ export const LogoLinha = styled.div`
     background-color: transparent;
     color: black;
     width: 100vw;
-    margin-top: 6vh;
+    margin-top: 2vh;
     box-sizing: border-box;
     padding: 8px;
     align-items: center;
@@ -18,12 +18,12 @@ export const LogoLinha = styled.div`
 export const Pai = styled.div`
     background-color: transparent;
     width: 100vw;
-    padding-top: 12vh;
+    padding-top: 8vh;
     color: white;
     text-transform: uppercase;
 
     ${customMedia.lessThan('desktop')`
-      padding-top: 13vh;
+      padding-top: 10vh;
     `};
 `
 

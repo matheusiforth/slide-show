@@ -1,6 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import * as S from './style'
 import { useRequeIni } from '../../util/hooks/useReqInicial'
+import MeuContexto from '../../util/context'
+
+let date = null;
 
 export function Filtro(props) {
 
@@ -9,14 +12,12 @@ export function Filtro(props) {
             dataUnidade,
             dataLinhaProducao,
             dataLinhaEscolha,
-            unidade,
-            linhaProducao,
-            linhaEscolha
         },
         functions: {
             recebeDados
         },
     } = useRequeIni()
+    const { unidade, atualizarContador } = useContext(MeuContexto)
 
     const [aberto, setAberto] = useState(true)
     const [periodoAtivo, setPeriodoAtivo] = useState(null);
@@ -25,34 +26,37 @@ export function Filtro(props) {
         if (value?.idUnidade) {
             recebeDados({ idUnidade: value?.idUnidade })
         }
-        if (value?.idLinhaProducao) {
-            recebeDados({ idLinhaProducao: value?.idLinhaProducao })
-        }
-        if (value?.idLinhaEscolha) {
-            recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
-        }
+        // if (value?.idLinhaProducao) {
+        //     recebeDados({ idLinhaProducao: value?.idLinhaProducao })
+        // }
+        // if (value?.idLinhaEscolha) {
+        //     recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
+        // }
         if (value?.periodo) {
             setPeriodoAtivo(value?.periodo)
             recebeDados({ periodo: value?.periodo })
+            atualizarContador({ periodo: value?.periodo })
         }
     }
 
     const optionsProducao = dataLinhaProducao?.map((value) => ({
-        label: value?.desclinha,
-        value: value?.idlinha
+        label: value?.DESCLINHA,
+        value: value?.IDLINHA
     })) || [];
 
     const optionsEscolha = dataLinhaEscolha?.map((value) => ({
-        label: value?.desclinha,
-        value: value?.idlinha
+        label: value?.DESCLINHA,
+        value: value?.IDLINHA
     })) || [];
 
     const onChangeProducao = (value) => {
         pegaDados({ idLinhaProducao: value?.map((value) => value?.value) })
+        atualizarContador({ idLinhaProducao: value?.map((value) => value?.value) })
     };
 
     const onChangeEscolha = (value) => {
         pegaDados({ idLinhaEscolha: value?.map((value) => value?.value) })
+        atualizarContador({ idLinhaEscolha: value?.map((value) => value?.value) })
     };
 
     const customStyles = {
@@ -99,7 +103,6 @@ export function Filtro(props) {
 
         const data = new Date();
         let ano = data.getFullYear();
-        let date = null
 
         if (value === 1) {
             data.setDate(data.getDate() - 1); // Subtrai 1 dia
@@ -115,7 +118,7 @@ export function Filtro(props) {
         }
 
         const nomeMes = meses[data.getMonth()];
-        recebeDados({ date: `${nomeMes} de ${ano}` })
+        date = `${nomeMes} de ${ano}`
     }
 
     return (
@@ -127,6 +130,7 @@ export function Filtro(props) {
 
                             <S.SelectNomal name="unidade" onChange={(e) => {
                                 pegaDados({ idUnidade: e.target.value });
+                                atualizarContador({ unidade: e.target.value });
 
                                 const selectedOption = e.target.options[e.target.selectedIndex];
                                 const selectedText = selectedOption.textContent;
@@ -137,7 +141,7 @@ export function Filtro(props) {
                                     <option value="0" disabled selected hidden>Selecione a unidade</option>
                                 }
                                 {dataUnidade?.map((value, index) => (
-                                    <option key={index} value={value?.idunidade}>{value?.descunidade}</option>
+                                    <option key={index} value={value?.IDUNIDADE}>{value?.DESCUNIDADE}</option>
                                 ))}
                             </S.SelectNomal>
 
@@ -168,7 +172,8 @@ export function Filtro(props) {
 
                         <S.Button style={{ background: '#5757aa' }}
                             onClick={() => {
-
+                                props?.atualizaEstadoComponente(false)
+                                props?.proximoComponente()
                             }}
                         >Aplicar filtro</S.Button>
                     </S.Body>
@@ -177,3 +182,5 @@ export function Filtro(props) {
         </>
     )
 }
+
+export { date };

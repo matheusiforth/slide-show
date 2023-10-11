@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useMutation, useQuery } from "react-query"
 import { reqLinhaEscolha, reqLinhaProducao, reqUnidade } from "../requisicoes"
-import { useTratativas } from "./useTratativas"
+// import { useTratativas } from "./useTratativas"
 
 export function useRequeIni() {
 
-    const {
-        handleExecutaRequestions,
-        functions: {
-            mutationColunaDisponibilidadeTurno,
-        }
-    } = useTratativas()
+    // const {
+    //     handleExecutaRequestions,
+    //     functions: {
+    //         mutationColunaDisponibilidadeTurno,
+    //     }
+    // } = useTratativas()
 
     const [unidade, setUnidade] = useState(0)
     const [linhaProducao, setLinhaProducao] = useState([])
@@ -38,43 +38,39 @@ export function useRequeIni() {
             mutateLinhaProducao(value?.idUnidade)
             mutateLinhaEscolha(value?.idUnidade)
         }
-        if (value?.idLinhaProducao) {
-            setLinhaProducao(value?.idLinhaProducao)
-        }
-        if (value?.idLinhaEscolha) {
-            setLinhaEscolha(value?.idLinhaEscolha)
-        }
-        if (value?.periodo) {
-            setPeriodo(value?.periodo)
-        }
-        if (value?.date) {
-            setDate(value?.date)
-        }
+        // if (value?.idLinhaProducao) {
+        //     setLinhaProducao(value?.idLinhaProducao)
+        // }
+        // if (value?.idLinhaEscolha) {
+        //     setLinhaEscolha(value?.idLinhaEscolha)
+        // }
+        // if (value?.periodo) {
+        //     setPeriodo(value?.periodo)
+        // }
+        // if (value?.date) {
+        //     setDate(value?.date)
+        // }
 
-        insereDados()
+        // insereDados()
     }
 
-    function insereDados() {
-        if (linhaProducao > 0 && periodo) {
-            mutationColunaDisponibilidadeTurno(unidade, linhaProducao, periodo)
-            console.log('if do insere dados')
-            handleExecutaRequestions(unidade, linhaProducao, periodo)
-        }
-    }
+    // function insereDados() {
+    //     if (linhaProducao > 0 && periodo) {
+    //         mutationColunaDisponibilidadeTurno(unidade, linhaProducao, periodo)
+    //         console.log('if do insere dados')
+    //         handleExecutaRequestions(unidade, linhaProducao, periodo)
+    //     }
+    // }
 
-    useEffect(() => {
-        insereDados()
-    }, [unidade, linhaProducao, linhaProducao, linhaEscolha, periodo]);
+    // useEffect(() => {
+    //     insereDados()
+    // }, [unidade, linhaProducao, linhaProducao, linhaEscolha, periodo]);
 
     return {
         dadosIniciais: {
             dataUnidade,
             dataLinhaProducao,
             dataLinhaEscolha,
-            unidade,
-            linhaProducao,
-            linhaEscolha,
-            periodo
         },
         functions: {
             recebeDados,

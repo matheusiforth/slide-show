@@ -10,6 +10,7 @@ export const Pai = styled.div`
     align-items: center;
     text-align: center;
     justify-content: space-between;
+    position: relative;
 `
 
 export const Principal = styled.div`

@@ -1,32 +1,51 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState } from 'react'
 import * as S from './style'
 import logoDexco from './imagens/dexco-logo.png'
 import logoIforth from './imagens/logo-iforth.png'
 import { Filtro } from './componentes/filtro';
-import { useTratativas } from './util/hooks';
+import Teste2 from './pages/teste2';
+import Teste3 from './pages/teste3';
+import Teste4 from './pages/teste4';
 
 export default function App() {
 
-    const {
-        dados: {
-            dadosColunaDisponibilidade,
-        },
-    } = useTratativas()
+    const componentes = [Teste2, Teste3, Teste4]
+    const [indiceComponente, setIndiceComponente] = useState(-1);
+    const [mostraComponente, setMostraComponente] = useState(true)
 
-    console.log(dadosColunaDisponibilidade)
+    const atualizaEstadoComponente = (novoEstado) => {
+        setMostraComponente(novoEstado)
+    }
+
+    const proximoComponente = () => {
+        if (indiceComponente < componentes.length - 1) {
+            setIndiceComponente(indiceComponente + 1);
+        }
+    };
+
+    const componenteAnterior = () => {
+        if (indiceComponente > 0) {
+            setIndiceComponente(indiceComponente - 1);
+        }
+    };
+
+    const ComponenteAtual = componentes[indiceComponente];
 
     return (
         <>
+            {/* <Teste /> */}
             <S.Pai>
                 <div></div>
+                {!mostraComponente && <div>
+                    <button onClick={componenteAnterior}>Anterior</button>
+                    <button onClick={proximoComponente}>Próximo</button>
+                    <ComponenteAtual />
+                </div>}
+
                 <S.Principal>
                     <S.Img src={logoDexco} />
-                    <Filtro />
+                    {mostraComponente && <Filtro atualizaEstadoComponente={atualizaEstadoComponente} proximoComponente={proximoComponente} />}
                 </S.Principal>
-                <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-                    <span style={{ background: 'red', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade?.valorTempoParado}</span>
-                    <span style={{ background: 'blue', width: 'fit-content', height: '50px', color: 'white', fontSize: '2rem' }}>{dadosColunaDisponibilidade?.valorDisponibilidade}</span>
-                </div>
 
                 <S.Footer>
                     <span style={{ color: 'white', width: 'fit-content' }}>logo grupo dexco</span>
