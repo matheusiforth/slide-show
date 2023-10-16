@@ -3,13 +3,19 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import "chartjs-plugin-datalabels";
 import * as S from './styles'
-import { Header } from '../header';
 import { larguraMonitor } from '../../util/global/varGlobal';
+import logoDexco from '../../imagens/dexco-logo.png'
+import { date } from '../filtro';
+import { useChamaComponente } from '../../util/hooks';
+
+// let testeGrafico = false
 
 export default function GraficoVertical(props) {
 
     ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, CategoryScale, LinearScale);
     ChartJS.register(...registerables);
+
+    // const { componente, atualizarComponente } = useChamaComponente()
 
     const options = {
         indexAxis: 'x',
@@ -46,6 +52,10 @@ export default function GraficoVertical(props) {
                     color: 'black'
                 }
             },
+            title: {
+                display: true,
+                text: `Produção diária ${localStorage.getItem('linhaProducao')} (m²)`
+            }
         },
         scales: {
             x: {
@@ -100,14 +110,31 @@ export default function GraficoVertical(props) {
         ],
     }
 
+    // testeGrafico = componente
+
     return (
         <>
-            <Header />
+            {/* <Header /> */}
+            {/* <S.LogoLinha>
+                <span style={{ color: 'white' }}>Ex Forno 1</span>
+                <S.Img src={logoDexco} onClick={() => atualizarComponente(true)} style={{ cursor: 'pointer' }} />
+            </S.LogoLinha>
+            <S.PaiHeader>
+                <S.EnglobaSubtitulo>
+                    <span>Indicadores de produção - <span>{date}</span></span>
+                    <span>Unidade {localStorage.getItem('unidade')}</span>
+                </S.EnglobaSubtitulo>
+            </S.PaiHeader> */}
+
             <S.Pai>
                 <S.EnglobaGrafico>
                     <Bar options={options} data={dataFake} />
+                    {/* <Bar options={options} data={dataFake} /> */}
+                    {/* <Bar options={options} data={dataFake} /> */}
                 </S.EnglobaGrafico>
             </S.Pai>
         </>
     );
 }
+
+// export { testeGrafico }

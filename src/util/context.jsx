@@ -11,7 +11,7 @@ export function MeuContextoProvider({ children }) {
     const [periodo, setPeriodo] = useState(null)
 
     function atualizarContador(value) {
-        const { unidade, idLinhaProducao, idLinhaEscolha, periodo } = value;
+        const { unidade, idLinhaProducao, idLinhaEscolha, periodo, zeraDados } = value;
 
         if (unidade !== undefined) {
             setUnidade(unidade);
@@ -24,6 +24,12 @@ export function MeuContextoProvider({ children }) {
         }
         if (periodo != undefined) {
             setPeriodo(periodo)
+        }
+        if (zeraDados === true) {
+            setUnidade(0)
+            setLinhaProducao(0)
+            setLinhaEscolha(0)
+            setPeriodo(0)
         }
     }
 

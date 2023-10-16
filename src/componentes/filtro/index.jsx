@@ -2,8 +2,10 @@ import { useContext, useState } from 'react'
 import * as S from './style'
 import { useRequeIni } from '../../util/hooks/useReqInicial'
 import MeuContexto from '../../util/context'
+import { useChamaComponente } from '../../util/hooks';
 
 let date = null;
+// let testeFiltro = true
 
 export function Filtro(props) {
 
@@ -17,7 +19,8 @@ export function Filtro(props) {
             recebeDados
         },
     } = useRequeIni()
-    const { unidade, atualizarContador } = useContext(MeuContexto)
+    // const { componente, atualizarComponente } = useChamaComponente()
+    const { unidade, atualizarContador, linhaProducao, linhaEscolha, periodo } = useContext(MeuContexto)
 
     const [aberto, setAberto] = useState(true)
     const [periodoAtivo, setPeriodoAtivo] = useState(null);
@@ -25,6 +28,7 @@ export function Filtro(props) {
     function pegaDados(value) {
         if (value?.idUnidade) {
             recebeDados({ idUnidade: value?.idUnidade })
+            atualizarContador({ unidade: value?.idUnidade })
         }
         // if (value?.idLinhaProducao) {
         //     recebeDados({ idLinhaProducao: value?.idLinhaProducao })
@@ -52,6 +56,13 @@ export function Filtro(props) {
     const onChangeProducao = (value) => {
         pegaDados({ idLinhaProducao: value?.map((value) => value?.value) })
         atualizarContador({ idLinhaProducao: value?.map((value) => value?.value) })
+
+        // console.log(value)
+
+        // const selectedOption = value.target.options[value.target.selectedIndex];
+        // const selectedText = selectedOption.textContent;
+
+        localStorage.setItem('linhaProducao', value?.map((value) => value?.label));
     };
 
     const onChangeEscolha = (value) => {
@@ -130,7 +141,6 @@ export function Filtro(props) {
 
                             <S.SelectNomal name="unidade" onChange={(e) => {
                                 pegaDados({ idUnidade: e.target.value });
-                                atualizarContador({ unidade: e.target.value });
 
                                 const selectedOption = e.target.options[e.target.selectedIndex];
                                 const selectedText = selectedOption.textContent;
@@ -170,10 +180,16 @@ export function Filtro(props) {
                             <S.Button ativo={periodoAtivo === 3} onClick={() => { pegaDados({ periodo: 3 }); mesesAtras(3) }}>trimestral</S.Button>
                         </div>
 
-                        <S.Button style={{ background: '#5757aa' }}
+                        <S.Button style={{ background: '#5757aa', cursor: 'pointer' }}
                             onClick={() => {
-                                props?.atualizaEstadoComponente(false)
-                                props?.proximoComponente()
+                                if (linhaProducao?.length === 0 || linhaEscolha?.length === 0 || periodo === 0) {
+                                    alert('Preencha todos os dados')
+                                } else {
+                                    { unidade > 0 && props?.atualizaEstadoComponente(false) }
+                                    { unidade > 0 && props?.teste() }
+                                }
+
+                                // atualizarComponente(false)
                             }}
                         >Aplicar filtro</S.Button>
                     </S.Body>
@@ -183,4 +199,4 @@ export function Filtro(props) {
     )
 }
 
-export { date };
+export { date, };

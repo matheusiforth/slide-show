@@ -22,3 +22,9 @@ export async function reqColunaDisponibilidadeTurno(value) {
     console.log(res.data)
     return res.data;
 }
+
+export async function reqEficienciaProducaoTurnoDia(value) {
+    const res = await Api.get(`/v1/web/producao/turno/${value.linhaProducao}/0/3`);
+    console.log(res.data)
+    return res.data;
+}

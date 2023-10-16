@@ -24,12 +24,15 @@ export const Principal = styled.div`
 
 export const Footer = styled.div`
     box-sizing: border-box;
+    background-color: black;
     width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     color: white;
+    position: fixed;
+    bottom: 0px;
 
 `
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { useMutation, useQuery } from "react-query";
-import { reqColunaDisponibilidadeTurno } from "../requisicoes";
-import { useColunaDisponibilidade } from "./useRequisicoes";
+import { reqColunaDisponibilidadeTurno, reqEficienciaProducaoTurnoDia } from "../requisicoes";
+import { useColunaDisponibilidade, useEficienciaProducaoTurnoDia } from "./useRequisicoes";
 import MeuContexto from '../context';
 
 export function useTratativas() {
@@ -10,6 +10,7 @@ export function useTratativas() {
             mutationFn: ({ unidade, linhaProducao, periodo }) => {
                 const resultados = Promise.all([
                     reqColunaDisponibilidadeTurno({ unidade, linhaProducao, periodo }),
+                    reqEficienciaProducaoTurnoDia({ linhaProducao }),
                 ])
                 return resultados
             }
@@ -18,6 +19,8 @@ export function useTratativas() {
 
     const requestions = useRequestions() //passei para const pois nao dava para usar no if
     const colunaDisponibilidade = useColunaDisponibilidade()
+    const eficienciaProducaoTurnoDia = useEficienciaProducaoTurnoDia()
+
     const { unidade, linhaProducao, periodo } = useContext(MeuContexto)
 
     const handleExecutaRequestions = async (unidade, linhaProducao, periodo) => { //desgraçado
@@ -30,6 +33,7 @@ export function useTratativas() {
     useEffect(() => {
         if (linhaProducao?.length > 0 && periodo) {
             colunaDisponibilidade.mutationColunaDisponibilidadeTurno(unidade, linhaProducao, periodo)
+            eficienciaProducaoTurnoDia.mutationEficienciaProducaoTurnoDia(linhaProducao)
             handleExecutaRequestions(unidade, linhaProducao, periodo)
         }
     }, [unidade, linhaProducao, periodo]);
@@ -42,15 +46,19 @@ export function useTratativas() {
                 dadosColunaDisponibilidade: {
                     valorDisponibilidade: 0,
                     valorTempoParado: 0,
+                    valorProducao: 0
+
                 },
             },
             functions: {
-                mutationColunaDisponibilidadeTurno: colunaDisponibilidade.mutationColunaDisponibilidadeTurno
+                mutationColunaDisponibilidadeTurno: colunaDisponibilidade.mutationColunaDisponibilidadeTurno,
+                mutationEficienciaProducaoTurnoDia: eficienciaProducaoTurnoDia.mutationEficienciaProducaoTurnoDia
+
             }
         }
     }
 
-    const [responseColunaDisponibilidadeTurno] = requestions?.data
+    const [responseColunaDisponibilidadeTurno, responseEficienciaProducaoTurnoDia] = requestions?.data
 
     const calcularDisponibilidade = () => {
 
@@ -63,15 +71,28 @@ export function useTratativas() {
         }
     }
 
+    const calculaEficienciaProducao = () => {
+
+        const valorProducao = responseEficienciaProducaoTurnoDia?.[0]?.PRODUCAO === undefined || responseEficienciaProducaoTurnoDia?.[0]?.PRODUCAO === 0 ? 0 : responseEficienciaProducaoTurnoDia?.[0]?.PRODUCAO?.toLocaleString('pt-BR', { currency: 'BRL' })
+
+        return {
+            valorProducao
+        }
+    }
+
     const { valorTempoParado, valorDisponibilidade } = calcularDisponibilidade();
+    const { valorProducao } = calculaEficienciaProducao();
 
     return {
         handleExecutaRequestions,
         dados: {
             dadosColunaDisponibilidade: {
                 valorTempoParado,
-                valorDisponibilidade
+                valorDisponibilidade,
             },
+            dadosEficienciaProducao: {
+                valorProducao
+            }
         },
         // functions: {
         //     mutationColunaDisponibilidadeTurno: colunaDisponibilidade.mutationColunaDisponibilidadeTurno

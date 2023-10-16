@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import MeuContexto from "../../util/context";
 import { useTratativas } from "../../util/hooks"
 
-export default function Teste() {
+export default function DadosFlutuantes() {
 
     const {
         dados: {
-            dadosColunaDisponibilidade
+            dadosColunaDisponibilidade,
+            dadosEficienciaProducao
         }
     } = useTratativas()
 
@@ -16,7 +17,7 @@ export default function Teste() {
 
     return (
         <>
-            <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: '0', zIndex: '999' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', left: '0', zIndex: '999', background: 'rgba(0,0,0, 0.5)', padding: '10px' }}>
                 <h1 style={{
                     width: 'fit-content',
                     height: '5vh',
@@ -32,6 +33,14 @@ export default function Teste() {
                     color: 'white'
                 }}>
                     disponibilidade {dadosColunaDisponibilidade?.valorDisponibilidade}
+                </h1>
+                <h1 style={{
+                    width: 'fit-content',
+                    height: '5vh',
+                    background: 'salmon',
+                    color: 'white'
+                }}>
+                    producao: {dadosEficienciaProducao?.valorProducao}
                 </h1>
                 <h1 style={{
                     width: 'fit-content',

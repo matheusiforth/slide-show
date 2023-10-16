@@ -10,5 +10,7 @@ export function useChamaComponente() {
         setComponente(novoComponente);
     };
 
+    // console.log(componente)
+
     return { componente, atualizarComponente };
 }
