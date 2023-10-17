@@ -3,11 +3,12 @@ import logoDexco from '../../imagens/dexco-logo.png'
 import { date } from '../filtro'
 import { useContext } from 'react';
 import MeuContexto from '../../util/context';
+import { ConverteJson } from '../../util/global/converteJson';
 
 export function Header(props) {
 
-    console.log(date)
-
+    // console.log(date)
+    const { teste } = ConverteJson()
     const { atualizarContador } = useContext(MeuContexto);
 
     return (
@@ -22,7 +23,7 @@ export function Header(props) {
             </S.LogoLinha>
             <S.Pai>
                 <S.EnglobaSubtitulo>
-                    <span>Indicadores de produção - <span>{date}</span></span>
+                    <span>{teste?.[0]?.tituloHeader} - <span>{date}</span></span>
                     <span>Unidade {localStorage.getItem('unidade')}</span>
                 </S.EnglobaSubtitulo>
             </S.Pai>

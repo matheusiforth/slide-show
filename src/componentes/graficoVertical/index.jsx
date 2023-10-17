@@ -6,16 +6,34 @@ import * as S from './styles'
 import { larguraMonitor } from '../../util/global/varGlobal';
 import logoDexco from '../../imagens/dexco-logo.png'
 import { date } from '../filtro';
-import { useChamaComponente } from '../../util/hooks';
+import { useChamaComponente, useTratativas } from '../../util/hooks';
+import { ConverteJson } from '../../util/global/converteJson';
 
 // let testeGrafico = false
 
 export default function GraficoVertical(props) {
 
+    //#002163 - azul 
+    //#ff5252 - vermelho 
+
     ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, CategoryScale, LinearScale);
     ChartJS.register(...registerables);
 
+    const { teste } = ConverteJson()
+
     // const { componente, atualizarComponente } = useChamaComponente()
+    // const {
+    //     dados: {
+    //         dadosColunaDisponibilidade: {
+    //             arrayTempoParado
+    //         },
+    //         dadosEficienciaProducao: {
+    //             arrayProducao,
+    //             valorProducao
+    //         }
+    //     },
+
+    // } = useTratativas();
 
     const options = {
         indexAxis: 'x',
@@ -54,7 +72,7 @@ export default function GraficoVertical(props) {
             },
             title: {
                 display: true,
-                text: `Produção diária ${localStorage.getItem('linhaProducao')} (m²)`
+                text: teste?.[0]?.tituloGrafico,
             }
         },
         scales: {
@@ -83,13 +101,15 @@ export default function GraficoVertical(props) {
         }
     }
 
+    console.log(teste)
+
     const dataFake = {
-        labels: ['teste1', 'teste2', 'teste3'],
+        labels: teste?.[0]?.labels,
         datasets: [
             {
                 label: 'valores de exemplo',
                 type: 'bar',
-                data: [50, 60, 70],
+                data: teste?.[0]?.arrayDados,
                 backgroundColor: [
                     'rgb(241, 137, 233)', 'rgba(77, 201, 246, 0.5)',
                     'rgba(246, 112, 25, 0.5)', 'rgba(157, 90, 249, 0.5)',
