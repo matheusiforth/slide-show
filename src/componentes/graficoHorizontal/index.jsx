@@ -3,6 +3,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import "chartjs-plugin-datalabels";
 import { larguraMonitor } from '../../util/global/varGlobal';
+import { date } from '../filtro';
 
 export function GraficoHorizontal() {
 
@@ -103,7 +104,7 @@ export function GraficoHorizontal() {
                     disponibilidade acumulada
                 </div>
                 <div style={{ background: 'black', textTransform: 'uppercase', color: 'white', border: 'solid 1px white', width: '220px', padding: '10px', borderRadius: '6px' }}>
-                    MÊS E ANO (JULHO - 2023)
+                    {date}
                 </div>
                 <div style={{ background: 'TRANSPARENT' }}>
                     <Bar options={options} data={dataFake} />

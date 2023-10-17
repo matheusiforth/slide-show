@@ -2,10 +2,8 @@ import { useContext, useState } from 'react'
 import * as S from './style'
 import { useRequeIni } from '../../util/hooks/useReqInicial'
 import MeuContexto from '../../util/context'
-import { useChamaComponente } from '../../util/hooks';
 
 let date = null;
-// let testeFiltro = true
 
 export function Filtro(props) {
 
@@ -19,7 +17,6 @@ export function Filtro(props) {
             recebeDados
         },
     } = useRequeIni()
-    // const { componente, atualizarComponente } = useChamaComponente()
     const { unidade, atualizarContador, linhaProducao, linhaEscolha, periodo } = useContext(MeuContexto)
 
     const [aberto, setAberto] = useState(true)
@@ -30,12 +27,7 @@ export function Filtro(props) {
             recebeDados({ idUnidade: value?.idUnidade })
             atualizarContador({ unidade: value?.idUnidade })
         }
-        // if (value?.idLinhaProducao) {
-        //     recebeDados({ idLinhaProducao: value?.idLinhaProducao })
-        // }
-        // if (value?.idLinhaEscolha) {
-        //     recebeDados({ idLinhaEscolha: value?.idLinhaEscolha })
-        // }
+
         if (value?.periodo) {
             setPeriodoAtivo(value?.periodo)
             recebeDados({ periodo: value?.periodo })
@@ -56,11 +48,6 @@ export function Filtro(props) {
     const onChangeProducao = (value) => {
         pegaDados({ idLinhaProducao: value?.map((value) => value?.value) })
         atualizarContador({ idLinhaProducao: value?.map((value) => value?.value) })
-
-        // console.log(value)
-
-        // const selectedOption = value.target.options[value.target.selectedIndex];
-        // const selectedText = selectedOption.textContent;
 
         localStorage.setItem('linhaProducao', value?.map((value) => value?.label));
     };

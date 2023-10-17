@@ -31,7 +31,7 @@ export const Footer = styled.div`
     align-items: center;
     justify-content: space-between;
     color: white;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0px;
 
 `

@@ -12,7 +12,7 @@ export const Pai = styled.div`
 
 export const EnglobaGrafico = styled.div`
     width: 87%;
-    height: 40vh;
+    height: 39vh; //40vh
     /* background: lightyellow; */
     box-sizing: border-box;
     padding: 1rem;

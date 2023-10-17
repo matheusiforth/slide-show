@@ -8,6 +8,7 @@ export function ConverteJson(props) {
     //         dadosEficienciaProducao
     //     }
     // } = useTratativas()
+
     function geraLabel() {
         const labels = [];
         for (let i = 1; i <= 30; i++) {
@@ -24,13 +25,19 @@ export function ConverteJson(props) {
         return numbers;
     }
 
-    const numeros = geraNumero();
     const trintaLabels = geraLabel();
+    const numeros = geraNumero();
 
     const teste = [
         {
             tituloHeader: 'Indicadores de produção',
             tituloGrafico: `Produção diária ${localStorage.getItem('linhaProducao')} (m²)`,
+            labels: trintaLabels,
+            arrayDados: numeros,
+        },
+        {
+            tituloHeader: 'Indicadores de produção',
+            tituloGrafico: `Aderência diária ${localStorage.getItem('linhaProducao')} (m²)`,
             labels: trintaLabels,
             arrayDados: numeros,
         }

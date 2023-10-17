@@ -123,11 +123,11 @@ export default function GraficoVertical(props) {
     return (
         <>
             <S.Pai>
-                <S.EnglobaGrafico>
+                <S.EnglobaGrafico style={{ width: props?.gh ? '87%' : "100%" }}>
                     <Bar options={options} data={dataFake} />
                     <Bar options={options} data={dataFake} />
                 </S.EnglobaGrafico>
-                <GraficoHorizontal />
+                {props?.gh && <GraficoHorizontal />}
             </S.Pai>
         </>
     );

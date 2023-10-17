@@ -6,15 +6,12 @@ import { Filtro, testeFiltro } from './componentes/filtro';
 import Teste1 from './pages/teste1';
 import Teste2 from './pages/teste2';
 import Teste3 from './pages/teste3';
-import { useChamaComponente } from './util/hooks';
 // import { testeGrafico } from './componentes/graficoVertical';
 import { Header } from './componentes/header';
 import DadosFlutuantes from './pages/dadosFlutuantes';
-import MeuContexto from './util/context';
 
 export default function App() {
 
-    const { componente } = useChamaComponente()
     // const { unidade, } = useContext(MeuContexto)
 
     const componentes = [Teste1, Teste2, Teste3]
@@ -53,8 +50,8 @@ export default function App() {
                 {indiceComponente >= 0 ? <Header atualizaEstadoComponente={atualizaEstadoComponente} /> : <div></div>}
                 {!mostraComponente && <div>
                     <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-                        {indiceComponente > 0 && <button onClick={componenteAnterior} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', width: '120px', height: '40px', cursor: 'pointer' }}>Anterior</button>}
-                        <button onClick={proximoComponente} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', width: '120px', height: '40px', cursor: 'pointer' }}>Próximo</button>
+                        {indiceComponente > 0 && <button onClick={componenteAnterior} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', padding: '2px', cursor: 'pointer' }}>Anterior</button>}
+                        <button onClick={proximoComponente} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', padding: '2px', cursor: 'pointer' }}>Próximo</button>
                     </div>
                     <ComponenteAtual />
                 </div>}
