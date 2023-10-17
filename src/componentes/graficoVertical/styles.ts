@@ -4,17 +4,16 @@ import { customMedia } from "../../util/customMedia";
 export const Pai = styled.div`
     height: 100%;
     display: flex;
-    flex-Direction: column;
+    /* flex-Direction: column; */
     width: 100%;
     box-sizing: border-box;
-    /* justify-content: center; */
     padding: 1vh 3px 0px 3px;
 `
 
 export const EnglobaGrafico = styled.div`
-    width: 100%;
+    width: 87%;
     height: 40vh;
-    background: lightyellow;
+    /* background: lightyellow; */
     box-sizing: border-box;
     padding: 1rem;
 `

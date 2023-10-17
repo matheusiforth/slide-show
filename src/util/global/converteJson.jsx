@@ -8,18 +8,36 @@ export function ConverteJson(props) {
     //         dadosEficienciaProducao
     //     }
     // } = useTratativas()
+    function geraLabel() {
+        const labels = [];
+        for (let i = 1; i <= 30; i++) {
+            labels.push(`teste ${i}`);
+        }
+        return labels;
+    }
+
+    function geraNumero() {
+        const numbers = [];
+        for (let i = 1; i <= 30; i++) {
+            numbers.push(i);
+        }
+        return numbers;
+    }
+
+    const numeros = geraNumero();
+    const trintaLabels = geraLabel();
 
     const teste = [
         {
             tituloHeader: 'Indicadores de produção',
             tituloGrafico: `Produção diária ${localStorage.getItem('linhaProducao')} (m²)`,
-            labels: ['teste 1', 'teste 2', 'teste 3'],
-            arrayDados: [30, 50, 70],
+            labels: trintaLabels,
+            arrayDados: numeros,
         }
     ]
 
 
-    return { 
+    return {
         teste
     }
 }

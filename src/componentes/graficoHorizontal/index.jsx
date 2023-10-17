@@ -2,14 +2,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import "chartjs-plugin-datalabels";
-import * as S from './styles'
 import { larguraMonitor } from '../../util/global/varGlobal';
-import { ConverteJson } from '../../util/global/converteJson';
-import { GraficoHorizontal } from '../graficoHorizontal';
 
-// let testeGrafico = false
-
-export default function GraficoVertical(props) {
+export function GraficoHorizontal() {
 
     //#002163 - azul 
     //#ff5252 - vermelho 
@@ -17,10 +12,8 @@ export default function GraficoVertical(props) {
     ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels, CategoryScale, LinearScale);
     ChartJS.register(...registerables);
 
-    const { teste } = ConverteJson()
-
     const options = {
-        indexAxis: 'x',
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         layout: {
@@ -34,7 +27,7 @@ export default function GraficoVertical(props) {
                 anchor: 'end',
                 clamp: true,
                 clip: false,
-                rotation: -90,
+                rotation: 0,
                 font: {
                     size: larguraMonitor >= 2800 ? 45 : 20
                 },
@@ -57,22 +50,16 @@ export default function GraficoVertical(props) {
             },
             title: {
                 display: true,
-                text: teste?.[0]?.tituloGrafico,
-                color: 'white',
-                font: {
-                    size: 15
-                }
+                // text: teste?.[0]?.tituloGrafico,
             }
         },
         scales: {
             x: {
                 grid: {
                     display: false, //tira as barrinhas de fundo
-                    color: 'yellow',
                 },
                 ticks: {
-                    // display: true,
-                    color: 'white',
+                    color: '#000',
                     font: {
                         weight: 800,
                         size: 0,
@@ -82,10 +69,8 @@ export default function GraficoVertical(props) {
             y: {
                 grid: {
                     display: false, //tira as barrinhas de fundo
-                    color: 'white',
                 },
                 ticks: {
-                    display: false,
                     font: {
                         size: larguraMonitor >= 2800 ? 30 : 14
                     }
@@ -94,41 +79,36 @@ export default function GraficoVertical(props) {
         }
     }
 
+    // console.log(teste)
+
     const dataFake = {
-        labels: teste?.[0]?.labels,
+        labels: ['teste 1', 'teste 2'],
         datasets: [
             {
                 label: 'valores de exemplo',
                 type: 'bar',
-                data: teste?.[0]?.arrayDados,
+                data: [20, 30],
                 backgroundColor: [
                     '#002163'
                 ],
                 borderWidth: 1,
             },
-            {
-                label: ' ',
-                type: 'line',
-                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
-                // data: [100],
-                fill: false,
-                borderWidth: 2,
-                borderColor: 'white'
-                // pointRadius: 
-            }
         ],
-
     }
 
     return (
         <>
-            <S.Pai>
-                <S.EnglobaGrafico>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                <div style={{ background: 'black', textTransform: 'uppercase', color: 'white', border: 'solid 1px white', width: '280px', padding: '10px', borderRadius: '6px' }}>
+                    disponibilidade acumulada
+                </div>
+                <div style={{ background: 'black', textTransform: 'uppercase', color: 'white', border: 'solid 1px white', width: '220px', padding: '10px', borderRadius: '6px' }}>
+                    MÊS E ANO (JULHO - 2023)
+                </div>
+                <div style={{ background: 'TRANSPARENT' }}>
                     <Bar options={options} data={dataFake} />
-                    <Bar options={options} data={dataFake} />
-                </S.EnglobaGrafico>
-                <GraficoHorizontal />
-            </S.Pai>
+                </div>
+            </div>
         </>
-    );
+    )
 }

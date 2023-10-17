@@ -1,7 +1,9 @@
-export default function Teste2(){
-    return(
-        <div style={{background: 'red', width: '100vw', height: '40vh'}}>
-            <h1>ujyfuityfufuyfuy</h1>
+import { GraficoHorizontal } from "../../componentes/graficoHorizontal";
+
+export default function Teste2() {
+    return (
+        <div style={{ background: 'lightgreen', width: '100vw', height: '80vh', left: '0vh', top: '20vh' }}>
+            <GraficoHorizontal />
         </div>
     )
 }

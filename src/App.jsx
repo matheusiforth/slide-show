@@ -48,7 +48,7 @@ export default function App() {
 
     return (
         <>
-            <DadosFlutuantes />
+            {/* <DadosFlutuantes /> */}
             <S.Pai>
                 {indiceComponente >= 0 ? <Header atualizaEstadoComponente={atualizaEstadoComponente} /> : <div></div>}
                 {!mostraComponente && <div>
