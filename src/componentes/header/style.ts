@@ -2,17 +2,27 @@ import styled from "styled-components";
 import { customMedia } from "../../util/customMedia";
 
 export const LogoLinha = styled.div`
-    background-color: transparent;
-    color: black;
-    width: 100vw;
-    margin-top: 2vh;
-    box-sizing: border-box;
-    padding: 8px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    text-transform: uppercase;
     position: absolute;
+    top: 0;
+
+    width: 100%;
+
+    padding: 1rem 0.5rem;
+
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: black;
+    text-transform: uppercase;
+
+    & > span {
+      color: white;
+    }
+    & > img {
+      cursor: pointer;
+    }
 `
 
 export const Pai = styled.div`
