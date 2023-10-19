@@ -8,7 +8,7 @@ type CaseProps = DefaultProps & {
   condition: boolean;
 };
 
-function Switch({ children }: { children: React.ReactNode }) {
+function Switch({ children }: DefaultProps) {
   let matchChild: React.ReactNode | null = null;
   let defaultCase: React.ReactNode | null = null;
 

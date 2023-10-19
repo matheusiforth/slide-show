@@ -12,23 +12,13 @@ import { useCurrentLinesContext } from './contexts/current-lines';
 import { useFilterContext } from './contexts/filter';
 
 import * as S from './style'
+import { Tables } from './pages/graphics';
 
 const { Switch, Case, Default } = ConditionalRendering
 
-function ExampleTable() {
-  return <></>
-}
-
-const LIST_TABLES = [
-  ExampleTable,
-  ExampleTable,
-  ExampleTable,
-  ExampleTable
-]
-
 export default function App() {
   const { haveFilter } = useFilterContext()
-  const { Buttons, currentValueIndex } = useNextPrevButtons(LIST_TABLES.length)
+  const { Buttons, currentValueIndex } = useNextPrevButtons(Object.values(Tables).length)
 
   return (
     <S.Pai>
@@ -38,15 +28,21 @@ export default function App() {
 
       <Switch>
 
-        <Case condition={haveFilter && currentValueIndex[0]}> <div>Tabela 1</div> </Case>
+        <Case condition={haveFilter && currentValueIndex[0]}>
+          <Tables.Producao />
+        </Case>
 
-        <Case condition={haveFilter && currentValueIndex[1]}> <div>Tabela 2</div> </Case>
+        <Case condition={haveFilter && currentValueIndex[1]}>
+          <Tables.Qualidade />
+        </Case>
 
-        <Case condition={haveFilter && currentValueIndex[2]}> <div>Tabela 3</div> </Case>
+        <Case condition={haveFilter && currentValueIndex[2]}>
+          <Tables.Descarte />
+        </Case>
 
-        <Case condition={haveFilter && currentValueIndex[3]}> <div>Tabela 4</div> </Case>
-
-        <Case condition={haveFilter && currentValueIndex[4]}> <div>Tabela 4</div> </Case>
+        <Case condition={haveFilter && currentValueIndex[3]}>
+          <Tables.Disponibilidade />
+        </Case>
 
         <Default>
           <S.Principal>
