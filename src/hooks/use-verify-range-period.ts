@@ -14,7 +14,7 @@ export function useVerifyRangePeriod() {
 }
 
 function verifyRangePeriod(startDate: string, endDate: string) {
-  const oneMonth = addMonths(new Date(startDate), 1);
+  const oneMonth = addMonths(new Date(startDate), 2);
 
   if (isAfter(new Date(endDate), oneMonth)) {
     return true
