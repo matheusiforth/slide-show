@@ -4,8 +4,8 @@ import { useFilterContext } from "../contexts/filter"
 import { Api } from "../util/api"
 
 import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
-import * as S from "./styles";
 
+import * as S from "./styles";
 
 type DisposalDataRequest = {
   DIA: {

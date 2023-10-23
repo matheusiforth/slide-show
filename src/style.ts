@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { customMedia } from "./util/customMedia";
 
-export const Pai = styled.div`
-  position: relative;
-
+export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+
 
   box-sizing: border-box;
   display: flex;
@@ -16,7 +15,7 @@ export const Pai = styled.div`
   text-align: center;
 `
 
-export const Principal = styled.section`
+export const WrapperFilter = styled.section`
   z-index: 10;
   position: fixed;
   top: 0;
@@ -106,6 +105,7 @@ export const ButtonBox = styled.div`
 
 export const ButtonNavigation = styled.button`
   width: 100%;
+  min-height: 30px;
 
   border: none;
   border-radius: 3px;

@@ -1,18 +1,12 @@
-import { useState } from 'react';
 
-import logoDexco from './imagens/dexco-logo.png'
-import logoIforth from './imagens/logo-iforth.png'
+import { Tables } from './pages';
+import { FilterPage, Footer, Header } from './components';
+import { useNextPrevButtons } from './hooks';
 
-import { FilterPage } from './Filter';
-
-import { Header } from './componentes/header';
+import { useFilterContext } from './contexts/filter';
 import { ConditionalRendering } from './utils';
 
-import { useCurrentLinesContext } from './contexts/current-lines';
-import { useFilterContext } from './contexts/filter';
-
 import * as S from './style'
-import { Tables } from './pages';
 
 const { Switch, Case, Default } = ConditionalRendering
 
@@ -21,7 +15,7 @@ export default function App() {
   const { Buttons, currentValueIndex } = useNextPrevButtons(Object.values(Tables).length)
 
   return (
-    <S.Pai>
+    <S.Wrapper>
       <Header />
 
       <Buttons />
@@ -44,112 +38,13 @@ export default function App() {
         </Case>
 
         <Default>
-          <S.Principal>
-            <S.Img src={logoDexco} />
-            <FilterPage />
-          </S.Principal>
+          <FilterPage />
         </Default>
       </Switch>
 
 
-      <S.Footer>
-        <span style={{ color: 'white', width: 'fit-content' }}>logo grupo dexco</span>
-        <S.ImgFooter src={logoIforth} />
-      </S.Footer>
-    </S.Pai>
+      <Footer />
+    </S.Wrapper>
   )
 }
 
-function useNextPrevButtons(lengthList: number) {
-  const { handleLines } = useCurrentLinesContext()
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentValueIndex, setCurrentValueIndex] = useState(
-    Array.from({ length: lengthList }, (_, index) => index === currentIndex)
-  );
-
-  if (lengthList === 1) {
-    return {
-      Buttons: () => <></>,
-      currentValueIndex
-    }
-  }
-
-  function goToFirst() {
-    setCurrentIndex(0);
-    setCurrentValueIndex(Array.from({ length: lengthList }, (_, index) => index === 0))
-  }
-
-  function goToPrev() {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      setCurrentValueIndex(Array.from({ length: lengthList }, (_, index) => index === currentIndex - 1))
-    }
-  }
-
-  function goToNext() {
-    if (currentIndex < lengthList - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setCurrentValueIndex(Array.from({ length: lengthList }, (_, index) => index === currentIndex + 1))
-    }
-  }
-
-  function goToLast() {
-    setCurrentIndex(lengthList - 1);
-    setCurrentValueIndex(Array.from({ length: lengthList }, (_, index) => index === lengthList - 1))
-  }
-
-  const isFirstElement = currentIndex === 0
-  const isLastElement = currentIndex === lengthList - 1
-
-  const Buttons = () => (
-    <S.ButtonBox>
-      {isFirstElement && (
-        <S.ButtonNavigation type="button" onClick={() => { goToLast(); handleLines.prev() }}>
-          Linha Anterior
-        </S.ButtonNavigation>
-      )}
-
-      {!isFirstElement && (
-        <S.ButtonNavigation type="button" onClick={goToPrev}>
-          Anterior
-        </S.ButtonNavigation>
-      )}
-
-      {!isLastElement && (
-        <S.ButtonNavigation type="button" onClick={goToNext}>
-          Próximo
-        </S.ButtonNavigation>
-      )}
-
-      {isLastElement && (
-        <S.ButtonNavigation type="button" onClick={() => { goToFirst(); handleLines.next() }}>
-          Próxima Linha
-        </S.ButtonNavigation>
-      )}
-    </S.ButtonBox>
-  );
-
-  return {
-    Buttons,
-    currentValueIndex
-  }
-}
-
-
-// {/* <DadosFlutuantes /> */}
-
-// {/*
-// {/* <div>
-//           <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-//             {indiceComponente > 0 && <button onClick={componenteAnterior} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', width: '120px', height: '40px', cursor: 'pointer' }}>Anterior</button>}
-//             <button onClick={proximoComponente} style={{ background: 'black', border: 'solid 1px white', textTransform: 'uppercase', color: 'white', borderRadius: '4px', width: '120px', height: '40px', cursor: 'pointer' }}>Próximo</button>
-//           </div>
-//           {/* <ComponenteAtual /> */}
-//         </div> */}
-// */}
-
-// {/* {indiceComponente >= 0 ? <Header atualizaEstadoComponente={atualizaEstadoComponente} /> : <div></div>} */}
-// {/* {indiceComponente < 0 && <S.Img src={logoDexco} />} */}
-// {/* {mostraComponente && <Filtro atualizaEstadoComponente={atualizaEstadoComponente} teste={teste} />} */}
-// {/* {haveFilter && <div> Voltar ao filtro </div>} */}

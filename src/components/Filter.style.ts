@@ -1,6 +1,34 @@
 import styled, { css } from 'styled-components'
 import ReactSelect from 'react-select'
 
+export const Wrapper = styled.section`
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: black;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  text-align: center;
+
+  height: 100%;
+  width: 100%;
+`
+
+export const Image = styled.img`
+  color: white;
+  width: 200px;
+`
+
+
 type ActiveProps = {
   active?: boolean
 }

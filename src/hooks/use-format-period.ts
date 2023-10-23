@@ -1,7 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
-import { SchemaFilter } from '../Filter'
+import { SchemaFilter } from '../components/Filter'
 
 export function useFormatPeriod(filter: SchemaFilter) {
   const [dateStart, dateEnd] = [

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { SchemaFilter } from '../Filter'
+import { SchemaFilter } from '../components/Filter'
 import { INITIAL_PERIOD } from '../constants';
 
 const INITIAL_FILTER = {
