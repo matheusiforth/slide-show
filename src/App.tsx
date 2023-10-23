@@ -12,7 +12,7 @@ import { useCurrentLinesContext } from './contexts/current-lines';
 import { useFilterContext } from './contexts/filter';
 
 import * as S from './style'
-import { Tables } from './pages/graphics';
+import { Tables } from './pages';
 
 const { Switch, Case, Default } = ConditionalRendering
 
@@ -27,7 +27,6 @@ export default function App() {
       <Buttons />
 
       <Switch>
-
         <Case condition={haveFilter && currentValueIndex[0]}>
           <Tables.Producao />
         </Case>
@@ -50,7 +49,6 @@ export default function App() {
             <FilterPage />
           </S.Principal>
         </Default>
-
       </Switch>
 
 
@@ -105,31 +103,31 @@ function useNextPrevButtons(lengthList: number) {
   const isLastElement = currentIndex === lengthList - 1
 
   const Buttons = () => (
-    <>
+    <S.ButtonBox>
       {isFirstElement && (
-        <button type="button" onClick={() => { goToLast(); handleLines.prev() }}>
+        <S.ButtonNavigation type="button" onClick={() => { goToLast(); handleLines.prev() }}>
           Linha Anterior
-        </button>
+        </S.ButtonNavigation>
       )}
 
       {!isFirstElement && (
-        <button type="button" onClick={goToPrev}>
+        <S.ButtonNavigation type="button" onClick={goToPrev}>
           Anterior
-        </button>
+        </S.ButtonNavigation>
       )}
 
       {!isLastElement && (
-        <button type="button" onClick={goToNext}>
+        <S.ButtonNavigation type="button" onClick={goToNext}>
           Próximo
-        </button>
+        </S.ButtonNavigation>
       )}
 
       {isLastElement && (
-        <button type="button" onClick={() => { goToFirst(); handleLines.next() }}>
+        <S.ButtonNavigation type="button" onClick={() => { goToFirst(); handleLines.next() }}>
           Próxima Linha
-        </button>
+        </S.ButtonNavigation>
       )}
-    </>
+    </S.ButtonBox>
   );
 
   return {

@@ -8,6 +8,14 @@ type CaseProps = DefaultProps & {
   condition: boolean;
 };
 
+function Case({ children }: CaseProps) {
+  return <>{children}</>;
+}
+
+function Default({ children }: DefaultProps) {
+  return <>{children}</>;
+}
+
 function Switch({ children }: DefaultProps) {
   let matchChild: React.ReactNode | null = null;
   let defaultCase: React.ReactNode | null = null;
@@ -30,14 +38,6 @@ function Switch({ children }: DefaultProps) {
   });
 
   return matchChild ?? defaultCase ?? null;
-}
-
-function Case({ children }: CaseProps): React.ReactNode {
-  return children;
-}
-
-function Default({ children }: DefaultProps): React.ReactNode {
-  return children;
 }
 
 export const ConditionalRendering = {

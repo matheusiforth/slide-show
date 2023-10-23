@@ -1,9 +1,30 @@
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: black;
-    color: black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+  color: black;
 
-    font-family: 'Roboto', sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+@media (min-width: 1920px) {
+  html, body, * {
+    font-size: 28px !important;
+  }
+
+  [class^=YO3Nla_spectrum-Textfield-input] {
+    font-size: 1rem;
+    padding: 0.2rem;
+    height: auto;
+  }
+  [class^=Dniwja_spectrum-FieldButton] {
+    height: auto;
+  }
+}
+
+
+
+.bla {
+  color: red;
 }

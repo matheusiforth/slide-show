@@ -96,3 +96,25 @@ export const BackToFilter = styled.a`
 
   cursor: pointer;
 `
+
+export const ButtonBox = styled.div`
+  margin-top: 0.325rem;
+  gap: 1rem;
+  width: calc(100% - 1.5rem);
+  display: flex;
+`
+
+export const ButtonNavigation = styled.button`
+  width: 100%;
+
+  border: none;
+  border-radius: 3px;
+
+  padding: 0.125rem;
+
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`

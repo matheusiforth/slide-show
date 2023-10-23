@@ -150,6 +150,10 @@ export function FilterPage() {
         control={methods.control}
         render={({ field }) => (
           <DateRangePicker
+            width={{
+              base: 'auto',
+              L: '18.25rem'
+            }}
             value={field.value}
             onChange={field.onChange}
             label="Período de pesquisa"

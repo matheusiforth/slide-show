@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { customMedia } from "../../util/customMedia";
 
 export const LogoLinha = styled.div`
+    font-size: 1rem;
     position: absolute;
     top: 0;
 
@@ -26,6 +27,7 @@ export const LogoLinha = styled.div`
 `
 
 export const Pai = styled.div`
+    font-size: 1rem;
     background-color: transparent;
     width: 100vw;
     padding-top: 8vh;
@@ -38,6 +40,7 @@ export const Pai = styled.div`
 `
 
 export const EnglobaSubtitulo = styled.div`
+    font-size: 1rem;
     color: white;
     width: 100vw;
     border-radius: 8px;

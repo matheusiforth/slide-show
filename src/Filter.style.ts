@@ -6,7 +6,8 @@ type ActiveProps = {
 }
 
 export const Form = styled.form`
-  margin-top: 10px;
+  font-size: 1rem;
+  margin-top: 0.625rem;
 
   display: flex;
   flex-direction: column;
@@ -20,7 +21,7 @@ export const Select = styled(ReactSelect)`
 
   text-align: left;
 
-  padding: 5px 0;
+  padding: 0.313rem 0;
 
   &:disabled {
     opacity: 0.5;
@@ -31,10 +32,10 @@ export const Select = styled(ReactSelect)`
 `
 
 export const ButtonWrapper = styled.section`
-  margin-top: 5px;
+  margin-top: 0.313rem;
 
   display: grid;
-  gap: 10px;
+  gap: 0.625rem;
   grid-template-columns: 1fr 1fr;
 `
 
@@ -69,7 +70,7 @@ export const ButtonPeriod = styled(ButtonBase)<ActiveProps>`
 
 export const ButtonSubmit = styled(ButtonBase)`
   background-color: #2796e6;
-  margin-top: 10px;
+  margin-top: 0.625rem;
 
   &:hover {
     background-color: #63B3ED;
