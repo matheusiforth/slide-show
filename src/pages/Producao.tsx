@@ -1,7 +1,7 @@
 import { useQuery } from "react-query"
-import { useCurrentLinesContext } from "../../contexts/current-lines"
-import { useFilterContext } from "../../contexts/filter"
-import { Api } from "../../util/api"
+import { useCurrentLinesContext } from "../contexts/current-lines"
+import { useFilterContext } from "../contexts/filter"
+import { Api } from "../util/api"
 
 import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
 import * as S from "./styles";
@@ -22,12 +22,11 @@ type ProductionDataRequest = {
 
 export function TabelaProducao() {
   const query = useProductionRequest()
-  console.log(query.data?.DIA)
+
 
   if (!query.data?.DIA.length) {
     return <S.TitleGraph> Produção Diária: Sem Dados </S.TitleGraph>
   }
-
 
   return (
     <S.WrapperPage>
@@ -35,7 +34,7 @@ export function TabelaProducao() {
 
       <S.WrapperGraph>
         <ResponsiveContainer>
-          <ComposedChart data={query.data?.DIA}
+          <ComposedChart data={query.data.DIA}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="DATA" />
@@ -57,7 +56,7 @@ export function TabelaProducao() {
 
       <S.WrapperGraph>
         <ResponsiveContainer>
-          <ComposedChart data={query.data?.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <ComposedChart data={query.data.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="DATA" />
             <YAxis />
