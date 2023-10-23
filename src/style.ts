@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { customMedia } from "./util/customMedia";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 
+  background-color: #000;
 
   box-sizing: border-box;
   display: flex;
@@ -65,11 +66,6 @@ export const Button = styled.button`
   &:hover{
       background-color: #161616;
   }
-
-  ${customMedia.lessThan('desktop')`
-      width: 11vw;
-      height: 7vh;
-  `};
 `
 
 export const ImgFooter = styled.img`
@@ -81,12 +77,6 @@ export const ImgFooter = styled.img`
 export const Img = styled.img`
   color: white;
   width: 200px;
-
-  ${customMedia.greaterThan('tv')`
-    width: 200px;
-    right: 15px;
-    top: 20px;
-  `};
 `
 
 export const BackToFilter = styled.a`

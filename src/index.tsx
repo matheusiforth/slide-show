@@ -6,7 +6,6 @@ import App from './App';
 
 import './index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { MeuContextoProvider } from './util/context';
 
 import { FilterContextProvider } from './contexts/filter';
 import { CurrentLinesProvider } from './contexts/current-lines';
@@ -20,15 +19,13 @@ root.render(
   <React.StrictMode>
     <AdobeProvider theme={defaultTheme}>
       <QueryClientProvider client={queryClient}>
-        <MeuContextoProvider>
 
-            <FilterContextProvider>
-              <CurrentLinesProvider>
-                <App />
-              </CurrentLinesProvider>
-            </FilterContextProvider>
+        <FilterContextProvider>
+          <CurrentLinesProvider>
+            <App />
+          </CurrentLinesProvider>
+        </FilterContextProvider>
 
-        </MeuContextoProvider>
       </QueryClientProvider>
     </AdobeProvider>
   </React.StrictMode>

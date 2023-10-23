@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useCurrentLinesContext } from "../contexts/current-lines";
 import { ButtonNavigation, ButtonBox } from "../style";
+import { useFilterContext } from "../contexts/filter";
 
 export function useNextPrevButtons(lengthList: number) {
+  const { filter } = useFilterContext()
   const { handleLines } = useCurrentLinesContext()
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,10 +45,11 @@ export function useNextPrevButtons(lengthList: number) {
 
   const isFirstElement = currentIndex === 0
   const isLastElement = currentIndex === lengthList - 1
+  const haveJustOneLine = filter.linesProduction.length === 1
 
   const Buttons = () => (
     <ButtonBox>
-      {isFirstElement && (
+      {isFirstElement && !haveJustOneLine && (
         <ButtonNavigation type="button" onClick={() => { goToLast(); handleLines.prev() }}>
           Linha Anterior
         </ButtonNavigation>
@@ -64,7 +67,7 @@ export function useNextPrevButtons(lengthList: number) {
         </ButtonNavigation>
       )}
 
-      {isLastElement && (
+      {isLastElement && !haveJustOneLine && (
         <ButtonNavigation type="button" onClick={() => { goToFirst(); handleLines.next() }}>
           Próxima Linha
         </ButtonNavigation>

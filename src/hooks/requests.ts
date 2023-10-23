@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "react-query";
-import { Api } from "../util/api";
+import { Api } from "../utils/api";
 
 type UnitRequest = {
   CONSIDERARQUEBRAUNIDADE: number

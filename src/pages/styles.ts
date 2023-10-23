@@ -7,7 +7,8 @@ export const TitleGraph = styled.h1`
 
 export const WrapperPage = styled.section`
   width: 100%;
-  height: calc(100vh - 10rem);
+  height: auto;
+  max-height: calc(100vh - 50px);
 `
 
 export const BoxPage = styled(WrapperPage)`
@@ -19,8 +20,13 @@ export const WrapperGraph = styled.div`
   height: calc(50vh - 11rem);
 
   @media (min-width: 1920px) {
-    height: calc(50vh - 260px);
+    height: calc(50vh - 8rem);
   }
+`
+
+export const WrapperPizza = styled.div`
+  width: 100%;
+  height: 100%;
 `
 
 type ColorProps = {

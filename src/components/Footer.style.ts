@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  position: fixed;
-  bottom: 0;
+  position: relative;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;

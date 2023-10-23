@@ -7,6 +7,7 @@ export const LogoLine = styled.div`
   width: calc(100% - 1.5rem);
 
   padding: 0.5rem;
+  max-height: 100px;
 
   box-sizing: border-box;
   display: flex;
@@ -23,7 +24,6 @@ export const LogoLine = styled.div`
 
 export const Wrapper = styled.div`
   font-size: 1rem;
-  background-color: transparent;
 
   width: 100%;
 
@@ -38,6 +38,7 @@ export const BoxSubtitle = styled.div`
   font-size: 1rem;
   color: white;
   text-transform: uppercase;
+  height: 3rem;
 
   width: calc(100% - 1.5rem);
 
@@ -45,10 +46,13 @@ export const BoxSubtitle = styled.div`
   border: solid 1px white;
   box-sizing: border-box;
 
-  padding: 0.5rem;
-
   display: flex;
   justify-content: space-around;
+  align-items: center;
+
+  @media (min-width: 1920px) {
+    height: 2rem;
+  }
 `
 
 export const Image = styled.img`

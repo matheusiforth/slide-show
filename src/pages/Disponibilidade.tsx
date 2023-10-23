@@ -1,11 +1,11 @@
 import { useQuery } from "react-query"
 import { useCurrentLinesContext } from "../contexts/current-lines"
 import { useFilterContext } from "../contexts/filter"
-import { Api } from "../util/api"
+import { Api } from "../utils/api"
 
 import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
 import * as S from "./styles";
-import { useFormatPeriod } from "../hooks";
+import { useFormatPeriod, useVerifyRangePeriod } from "../hooks";
 
 type Availability = {
   MINUTOS: number
@@ -30,6 +30,7 @@ type AvailabilityDataRequest = {
 }
 
 export function TabelaDisponibilidade() {
+  const { outRange } = useVerifyRangePeriod()
   const query = useAvailabilityRequest()
   const { filter } = useFilterContext()
   const currentPeriod = useFormatPeriod(filter)
@@ -51,9 +52,9 @@ export function TabelaDisponibilidade() {
                     name="Horas"
                     type="monotone"
                     dataKey="DISPONIBILIDADE.MINUTOS"
-                    label={{ fill: '#E1E1DD', angle: -90 }}
+                    label={!outRange && { fill: '#E1E1DD', angle: -90 }}
                     activeBar={{ stroke: 'white', strokeWidth: 2 }}
-                    fill="#000024"
+                    fill="#002163"
                   />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -61,7 +62,7 @@ export function TabelaDisponibilidade() {
 
             <S.Legend.Root>
               <S.Legend.Box>
-                <S.Legend.Color color="#000024" />
+                <S.Legend.Color color="#002163" />
                 <S.Legend.Label> Horas </S.Legend.Label>
               </S.Legend.Box>
             </S.Legend.Root>
@@ -85,30 +86,30 @@ export function TabelaDisponibilidade() {
                     name="Horas"
                     type="monotone"
                     dataKey="DISPONIBILIDADE.PORCENTAGEM"
-                    label={{ fill: '#E1E1DD', angle: -90 }}
+                    label={!outRange && { fill: '#E1E1DD', angle: -90 }}
                     activeBar={{ stroke: 'white', strokeWidth: 2 }}
-                    fill="#000024"
+                    fill="#002163"
                   >
                     {query.data?.DIA.map((entry) => (
-                      <Cell fill={entry.DISPONIBILIDADE.PORCENTAGEM > entry.DISPONIBILIDADEPROJETADA ? '#000024' : '#f13f09'} />
+                      <Cell fill={entry.DISPONIBILIDADE.PORCENTAGEM > entry.DISPONIBILIDADEPROJETADA ? '#002163' : '#ff5252'} />
                     ))}
                   </Bar>
-                  <Line name="Descarte Projetado" type="monotone" dataKey='DISPONIBILIDADEPROJETADA' stroke="#FF8600" />
+                  <Line name="Descarte Projetado" type="monotone" dataKey='DISPONIBILIDADEPROJETADA' stroke="#fff" />
                 </ComposedChart>
               </ResponsiveContainer>
             </S.WrapperGraph>
 
             <S.Legend.Root>
               <S.Legend.Box>
-                <S.Legend.Color color="#000024" />
+                <S.Legend.Color color="#002163" />
                 <S.Legend.Label> Dentro do projetado </S.Legend.Label>
               </S.Legend.Box>
               <S.Legend.Box>
-                <S.Legend.Color color="#f13f09" />
+                <S.Legend.Color color="#ff5252" />
                 <S.Legend.Label> Acima do projetado </S.Legend.Label>
               </S.Legend.Box>
               <S.Legend.Box>
-                <S.Legend.Color color="#FF8600" />
+                <S.Legend.Color color="#fff" />
                 <S.Legend.Label> Qualidade </S.Legend.Label>
               </S.Legend.Box>
             </S.Legend.Root>

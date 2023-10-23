@@ -1,10 +1,13 @@
 import { useQuery } from "react-query"
 import { useCurrentLinesContext } from "../contexts/current-lines"
 import { useFilterContext } from "../contexts/filter"
-import { Api } from "../util/api"
+import { Api } from "../utils/api"
 
 import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
+
+
 import * as S from "./styles";
+import { useVerifyRangePeriod } from "../hooks";
 
 
 type ProductionDataRequest = {
@@ -21,6 +24,7 @@ type ProductionDataRequest = {
 }
 
 export function TabelaProducao() {
+  const { outRange } = useVerifyRangePeriod()
   const query = useProductionRequest()
 
 
@@ -39,15 +43,15 @@ export function TabelaProducao() {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="DATA" />
             <YAxis />
-            <Tooltip wrapperStyle={{backgroundColor: 'black'}} />
-            <Bar name="Produção" type="monotone" dataKey="PRODUCAO" label={{ fill: '#E1E1DD', angle: -90 }} activeBar={{ stroke: 'white', strokeWidth: 2 }} fill='#000024' />
+            <Tooltip wrapperStyle={{backgroundColor: 'black', color: 'black' }}  />
+            <Bar name="Produção" type="monotone" dataKey="PRODUCAO" label={!outRange && { fill: '#E1E1DD', angle: -90 }} activeBar={{ stroke: 'white', strokeWidth: 2 }} fill='#002163' />
           </ComposedChart>
         </ResponsiveContainer>
       </S.WrapperGraph>
 
       <S.Legend.Root>
         <S.Legend.Box>
-          <S.Legend.Color color="#000024" />
+          <S.Legend.Color color="#002163" />
           <S.Legend.Label> Produção </S.Legend.Label>
         </S.Legend.Box>
       </S.Legend.Root>
@@ -65,30 +69,30 @@ export function TabelaProducao() {
               name="Aderência"
               type="monotone"
               dataKey="ADERENCIA"
-              label={{ fill: '#E1E1DD', angle: -90 }}
+              label={!outRange && { fill: '#E1E1DD', angle: -90 }}
               activeBar={{ stroke: 'white', strokeWidth: 2 }}
-              fill="#000024"
+              fill="#002163"
             >
               {query.data?.DIA.map((entry) => (
-                  <Cell fill={entry.ADERENCIA > entry.ADERENCIAPROJETADA ? '#000024' : '#f13f09' } />
+                  <Cell fill={entry.ADERENCIA > entry.ADERENCIAPROJETADA ? '#002163' : '#ff5252' } />
               ))}
             </Bar>
 
-            <Line name="Aderência Projetada" type="monotone" dataKey='ADERENCIAPROJETADA' stroke="#FF8600" />
+            <Line name="Aderência Projetada" type="monotone" dataKey='ADERENCIAPROJETADA' stroke="#fff" />
           </ComposedChart>
         </ResponsiveContainer>
       </S.WrapperGraph>
       <S.Legend.Root>
         <S.Legend.Box>
-          <S.Legend.Color color="#000024" />
+          <S.Legend.Color color="#002163" />
           <S.Legend.Label> Acima do projetado </S.Legend.Label>
         </S.Legend.Box>
         <S.Legend.Box>
-          <S.Legend.Color color="#f13f09" />
+          <S.Legend.Color color="#ff5252" />
           <S.Legend.Label> Abaixo do projetado </S.Legend.Label>
         </S.Legend.Box>
         <S.Legend.Box>
-          <S.Legend.Color color="#FF8600" />
+          <S.Legend.Color color="#fff" />
           <S.Legend.Label> Aderência Projetada </S.Legend.Label>
         </S.Legend.Box>
       </S.Legend.Root>
@@ -138,3 +142,4 @@ function useProductionRequest() {
     }
   })
 }
+

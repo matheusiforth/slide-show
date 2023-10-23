@@ -1,7 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   background-color: black;
   color: black;
 
@@ -10,7 +13,7 @@ body {
 
 @media (min-width: 1920px) {
   html, body, * {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 
   [class^=YO3Nla_spectrum-Textfield-input] {
@@ -21,10 +24,8 @@ body {
   [class^=Dniwja_spectrum-FieldButton] {
     height: auto;
   }
-}
 
-
-
-.bla {
-  color: red;
+  [class^=A-HlBa_spectrum-FieldLabel] {
+    font-size: 28px;
+  }
 }
