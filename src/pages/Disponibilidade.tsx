@@ -36,7 +36,7 @@ export function TabelaDisponibilidade() {
   const currentPeriod = useFormatPeriod(filter)
 
   const accumulatedAvailability = [
-    { name: 'Horas utilizadas', value: Math.floor((query?.data?.TOTAL?.MINUTOS?.UTILIZADAS || 0) / 60) },
+    { name: 'Horas Utilizadas', value: Math.floor((query?.data?.TOTAL?.MINUTOS?.UTILIZADAS || 0) / 60) },
     { name: 'Horas Disponíveis', value: Math.floor((query?.data?.TOTAL?.MINUTOS?.DISPONIVEIS || 0) / 60) }
   ]
 

@@ -49,9 +49,9 @@ export function useNextPrevButtons(lengthList: number) {
 
   const Buttons = () => (
     <ButtonBox>
-      {isFirstElement && !haveJustOneLine && (
+      {isFirstElement && (
         <ButtonNavigation type="button" onClick={() => { goToLast(); handleLines.prev() }}>
-          Linha Anterior
+          {!haveJustOneLine ? 'Linha Anterior' : 'Anterior'}
         </ButtonNavigation>
       )}
 
@@ -67,9 +67,9 @@ export function useNextPrevButtons(lengthList: number) {
         </ButtonNavigation>
       )}
 
-      {isLastElement && !haveJustOneLine && (
+      {isLastElement && (
         <ButtonNavigation type="button" onClick={() => { goToFirst(); handleLines.next() }}>
-          Próxima Linha
+          {!haveJustOneLine ? 'Próxima Linha' : 'Próximo'}
         </ButtonNavigation>
       )}
     </ButtonBox>
