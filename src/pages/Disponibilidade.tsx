@@ -50,9 +50,7 @@ export function TabelaDisponibilidade() {
             <S.WrapperGraph>
               <ResponsiveContainer>
                 <ComposedChart data={query.data?.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                  <CartesianGrid vertical={false} />
                   <XAxis dataKey="DATA" />
-                  <YAxis />
                   <Tooltip wrapperStyle={{ color: 'black' }} />
                   <Bar
                     name="Horas"
@@ -84,9 +82,7 @@ export function TabelaDisponibilidade() {
             <S.WrapperGraph>
               <ResponsiveContainer>
                 <ComposedChart data={query.data?.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                  <CartesianGrid vertical={false} />
                   <XAxis dataKey="DATA" />
-                  <YAxis />
                   <Tooltip wrapperStyle={{ color: 'black' }} />
                   <Bar
                     name="Horas"
@@ -136,7 +132,7 @@ export function TabelaDisponibilidade() {
                 data={accumulatedAvailability}
                 margin={{left: 85}}
               >
-                <XAxis type="number" />
+                <XAxis type="number" display="none" />
                 <YAxis type="category"  dataKey="name" />
                 <CartesianGrid vertical={false} />
                 <Tooltip wrapperStyle={{ color: 'black' }} />

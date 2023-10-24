@@ -57,9 +57,7 @@ export function TabelaQualidade() {
           <S.WrapperGraph>
             <ResponsiveContainer>
               <ComposedChart data={queryQuality.data?.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid vertical={false} />
                 <XAxis dataKey="DATA" />
-                <YAxis />
                 <Tooltip wrapperStyle={{ color: 'black' }} />
                 <Bar
                   name="Qualidade"

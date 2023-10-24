@@ -33,9 +33,7 @@ export function TabelaDescarte() {
           <S.WrapperGraph>
             <ResponsiveContainer>
               <ComposedChart data={query.data?.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid vertical={false} />
                 <XAxis dataKey="DATA" />
-                <YAxis />
                 <Tooltip wrapperStyle={{ color: 'black' }} />
                 <Bar
                   name="Descarte"

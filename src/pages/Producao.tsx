@@ -5,10 +5,8 @@ import { Api } from "../utils/api"
 
 import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
 
-
 import * as S from "./styles";
 import { useVerifyRangePeriod } from "../hooks";
-import { useEffect } from "react";
 
 
 type ProductionDataRequest = {
@@ -41,9 +39,7 @@ export function TabelaProducao() {
         <ResponsiveContainer>
           <ComposedChart data={query.data.DIA}
             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid vertical={false} />
             <XAxis dataKey="DATA" />
-            <YAxis />
             <Tooltip wrapperStyle={{backgroundColor: 'black', color: 'black' }}  />
             <Bar name="Produção" type="monotone" dataKey="PRODUCAO" label={!outRange && { fill: '#E1E1DD', angle: -90 }} activeBar={{ stroke: 'white', strokeWidth: 2 }} fill='#002163' />
           </ComposedChart>
@@ -62,9 +58,7 @@ export function TabelaProducao() {
       <S.WrapperGraph>
         <ResponsiveContainer>
           <ComposedChart data={query.data.DIA} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid vertical={false} />
             <XAxis dataKey="DATA" />
-            <YAxis />
             <Tooltip wrapperStyle={{color: 'black'}} />
             <Bar
               name="Aderência"
