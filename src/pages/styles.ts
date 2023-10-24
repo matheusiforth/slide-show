@@ -128,3 +128,17 @@ export const Box = {
     gap: 0.5rem;
   `,
 }
+
+export const AccumulatedBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  height: 40vh;
+
+  @media (min-width: 1920px) {
+    height: 30vh;
+    width: 100%;
+  }
+`

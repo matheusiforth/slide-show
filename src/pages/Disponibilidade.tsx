@@ -3,7 +3,7 @@ import { useCurrentLinesContext } from "../contexts/current-lines"
 import { useFilterContext } from "../contexts/filter"
 import { Api } from "../utils/api"
 
-import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
+import { BarChart, ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, ResponsiveContainer  } from 'recharts';
 import * as S from "./styles";
 import { useFormatPeriod, useVerifyRangePeriod } from "../hooks";
 
@@ -34,6 +34,12 @@ export function TabelaDisponibilidade() {
   const query = useAvailabilityRequest()
   const { filter } = useFilterContext()
   const currentPeriod = useFormatPeriod(filter)
+
+  const accumulatedAvailability = [
+    { name: 'Horas utilizadas', value: Math.floor((query?.data?.TOTAL?.MINUTOS?.UTILIZADAS || 0) / 60) },
+    { name: 'Horas Disponíveis', value: Math.floor((query?.data?.TOTAL?.MINUTOS?.DISPONIVEIS || 0) / 60) }
+  ]
+
   return (
     <S.BoxPage>
       <div style={{ width: '65%' }}>
@@ -122,20 +128,34 @@ export function TabelaDisponibilidade() {
         <S.Box.Title> Disponibilidade Acumulada </S.Box.Title>
         <S.Box.SubTitle> {currentPeriod} </S.Box.SubTitle>
 
-        <S.Box.BoxHours>
-          <S.Box.TitleHours>
-            <div> Horas utilizadas </div>
-            <div> Horas disponíveis </div>
-          </S.Box.TitleHours>
-
-          {query?.data?.TOTAL && (
-            <S.Box.TitleValues>
-              <div> {Math.floor(query?.data?.TOTAL?.MINUTOS?.UTILIZADAS / 60)} Horas </div>
-              <div> {Math.floor(query?.data?.TOTAL?.MINUTOS?.DISPONIVEIS / 60)} Horas </div>
-            </S.Box.TitleValues>
-          )}
-
-        </S.Box.BoxHours>
+        {query?.data?.TOTAL && (
+          <S.AccumulatedBox>
+            <ResponsiveContainer>
+              <BarChart
+                layout="vertical"
+                data={accumulatedAvailability}
+                margin={{top: 5, right: 30, left: 20, bottom: 5}}
+              >
+                <XAxis type="number" />
+                <YAxis type="category"  dataKey="name" />
+                <CartesianGrid vertical={false} />
+                <Tooltip wrapperStyle={{ color: 'black' }} />
+                <Bar
+                  name="Horas"
+                  type="monotone"
+                  dataKey="value"
+                  label={{ fill: '#E1E1DD' }}
+                  activeBar={{ stroke: 'white', strokeWidth: 2 }}
+                  fill="#002163"
+                >
+                  {accumulatedAvailability.map((entry) => (
+                    <Cell fill={entry.name === 'Horas Disponíveis' ? '#002163' : '#ff5252'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </S.AccumulatedBox>
+        )}
       </div>
     </S.BoxPage>
   )
