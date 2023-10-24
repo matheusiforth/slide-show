@@ -13,12 +13,12 @@ export function Footer() {
   return (
     <S.Wrapper>
       <div>
-        <S.Logos style={{ height: 10, width: 100 }} src={deca} />
+        <S.Logos style={{ height: 11, width: 100 }} src={deca} />
         <S.Logos style={{ height: 12.75, width: 100 }} src={portinari} />
         <S.Logos style={{ height: 13, width: 100 }} src={hydra} />
         <S.Logos style={{ height: 12.75, width: 100 }} src={duratex} />
         <S.Logos style={{ height: 12.75, width: 100 }} src={castelatto} />
-        <S.Logos style={{ height: 10, width: 100 }} src={ceusa} />
+        <S.Logos style={{ height: 11, width: 100 }} src={ceusa} />
         <S.Logos style={{ height: 12.75, width: 100 }} src={durafloor} />
       </div>
 

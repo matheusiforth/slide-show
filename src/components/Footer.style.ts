@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   position: relative;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -28,8 +27,7 @@ export const Image = styled.img`
   margin: auto;
 
   color: white;
-  width: 70px;
-  padding: 8px;
+  width: 120px;
   padding-right: 20px;
 `
 
