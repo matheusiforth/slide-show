@@ -124,7 +124,7 @@ export function TabelaDisponibilidade() {
           <S.TitleGraph> Porcentagem Disponibilidade Diária: Sem Dados </S.TitleGraph>
         )}
       </div>
-      <div style={{ width: '30%' }}>
+      <div style={{ width: '30%', display: 'flex', flexDirection: 'column' }}>
         <S.Box.Title> Disponibilidade Acumulada </S.Box.Title>
         <S.Box.SubTitle> {currentPeriod} </S.Box.SubTitle>
 
@@ -134,7 +134,7 @@ export function TabelaDisponibilidade() {
               <BarChart
                 layout="vertical"
                 data={accumulatedAvailability}
-                margin={{top: 5, right: 30, left: 20, bottom: 5}}
+                margin={{left: 85}}
               >
                 <XAxis type="number" />
                 <YAxis type="category"  dataKey="name" />

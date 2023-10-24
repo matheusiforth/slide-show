@@ -8,6 +8,7 @@ import { ComposedChart, Cell, Line, XAxis, YAxis, CartesianGrid, Tooltip, Bar, R
 
 import * as S from "./styles";
 import { useVerifyRangePeriod } from "../hooks";
+import { useEffect } from "react";
 
 
 type ProductionDataRequest = {
@@ -117,7 +118,7 @@ function useProductionRequest() {
   const url = `v3/web/maine/producao/${filter.unit.value}/${lines.lineProduction.value}?dtIni=${filter.period.start.toString()}&dtFim=${filter.period.end.toString()}`
 
   return useQuery({
-    queryKey: ['query-production-request'],
+    queryKey: ['query-production-request', lines],
     queryFn: async () => {
       const response = await Api.get<ProductionDataRequest>(url);
 

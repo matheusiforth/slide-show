@@ -20,7 +20,7 @@ export const WrapperGraph = styled.div`
   height: calc(50vh - 11rem);
 
   @media (min-width: 1920px) {
-    height: calc(50vh - 8rem);
+    height: calc(50vh - 8.5rem);
   }
 `
 
@@ -130,15 +130,16 @@ export const Box = {
 }
 
 export const AccumulatedBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  align-self: flex-start;
   width: 100%;
 
   height: 40vh;
 
   @media (min-width: 1920px) {
+    display: flex;
+    align-self: flex-end;
+
     height: 30vh;
-    width: 100%;
+    width: 90%;
   }
 `

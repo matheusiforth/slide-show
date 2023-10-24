@@ -169,7 +169,7 @@ export function FilterPage() {
           )}
         />
 
-        <S.ButtonSubmit> Salvar </S.ButtonSubmit>
+        <S.ButtonSubmit> Aplicar Filtro </S.ButtonSubmit>
       </S.Form>
     </S.Wrapper>
   )
