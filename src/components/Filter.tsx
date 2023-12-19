@@ -15,25 +15,17 @@ import * as S from './Filter.style'
 
 const CalendarDateSchema = zod.instanceof(CalendarDate);
 
+const OptionSchema = zod.object({
+  label: zod.string(),
+  value: zod.number()
+}, {
+  required_error: 'Campo obrigatório'
+})
+
 const schema = zod.object({
-  unit: zod.object({
-    label: zod.string(),
-    value: zod.number()
-  }, {
-    required_error: 'Campo obrigatório'
-  }),
-  linesProduction: zod.array(zod.object({
-    label: zod.string(),
-    value: zod.number()
-  }), {
-    required_error: 'Campo obrigatório'
-  }),
-  linesChoice: zod.array(zod.object({
-    label: zod.string(),
-    value: zod.number()
-  }), {
-    required_error: 'Campo obrigatório'
-  }),
+  unit: OptionSchema,
+  linesProduction: zod.array(OptionSchema),
+  linesChoice: zod.array(OptionSchema),
   period: zod.object({
     start: CalendarDateSchema,
     end: CalendarDateSchema
